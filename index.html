@@ -1166,7 +1166,7 @@ footer {
     <div class="nav-actions">
       <button class="icon-button menu-toggle" id="menuToggle" aria-label="Hap menunë">☰</button>
       <button class="icon-button" id="cartButton" aria-label="Hap shportën">
-        ♡
+        🛒
         <span class="cart-count" id="cartCount">0</span>
       </button>
     </div>
@@ -1367,8 +1367,8 @@ footer {
       <a href="https://www.instagram.com/delulu_boutique_al/" target="_blank" rel="noopener">
         Instagram
       </a>
-      <a href="https://wa.me/355684445489" target="_blank" rel="noopener">
-        WhatsApp: +355 68 444 5489
+      <a href="https://wa.me/18194867799" target="_blank" rel="noopener">
+        WhatsApp: +1 (819) 486-7799
       </a>
     </div>
   </div>
@@ -1384,7 +1384,7 @@ footer {
 <!-- CART DRAWER -->
 <aside class="cart-drawer" id="cartDrawer" aria-label="Shporta">
   <div class="cart-header">
-    <h2>Shporta ime ♡</h2>
+    <h2>Shporta ime 🛒</h2>
     <button class="close-button" id="closeCart" aria-label="Mbyll shportën">×</button>
   </div>
 
@@ -1452,7 +1452,7 @@ const products = [
     id: 1,
     name: "UGG Low Brown",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/ugglow1.jpeg",
     badge: "Sale"
@@ -1461,7 +1461,7 @@ const products = [
     id: 2,
     name: "UGG Low Dark Brown",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/ugglow2.jpeg",
     badge: "Sale"
@@ -1470,7 +1470,7 @@ const products = [
     id: 3,
     name: "UGG Low Beige",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/ugglow3.jpeg",
     badge: "Sale"
@@ -1506,7 +1506,7 @@ const products = [
     id: 7,
     name: "UGG Tazz Dark Brown",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg3.jpeg",
     badge: "Sale"
@@ -1542,7 +1542,7 @@ const products = [
     id: 11,
     name: "UGG Beige",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/uggll1.jpeg",
     badge: "Sale"
@@ -1569,7 +1569,7 @@ const products = [
     id: 14,
     name: "UGG Tazz Dark Brown",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg1.jpeg",
     badge: "Sale"
@@ -1587,7 +1587,7 @@ const products = [
     id: 16,
     name: "UGG Brown",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/uggll2.jpeg",
     badge: "Sale"
@@ -1596,7 +1596,7 @@ const products = [
     id: 17,
     name: "UGG Tazz Black",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg2.jpeg",
     badge: "Sale"
@@ -1614,7 +1614,7 @@ const products = [
     id: 19,
     name: "UGG Tazz Brown",
     category: "uggs",
-    price: 2900,
+    price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg4.jpeg",
     badge: "Sale"
@@ -1800,7 +1800,7 @@ function addToCart(productId) {
   }
 
   updateCart();
-  showToast("Produkti u shtua në shportë ♡");
+  showToast("Produkti u shtua në shportë 🛒");
 }
 
 function updateCart() {
@@ -1820,7 +1820,7 @@ function updateCart() {
   if (cart.length === 0) {
     cartItemsContainer.innerHTML = `
       <div class="empty-cart">
-        <div style="font-size:38px;margin-bottom:15px;">♡</div>
+        <div style="font-size:38px;margin-bottom:15px;">🛒</div>
         <h3 style="margin-bottom:8px;">Shporta është bosh</h3>
         <p>Zbulo koleksionin dhe shto produktet e tua të preferuara.</p>
       </div>
@@ -1964,7 +1964,7 @@ document.getElementById("checkoutForm").addEventListener("submit", event => {
 
   message += "\nFaleminderit!";
 
-  const whatsappNumber = "355684445489";
+  const whatsappNumber = "18194867799";
   const whatsappURL =
     "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
 
