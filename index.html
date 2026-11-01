@@ -1,1798 +1,2178 @@
 <!DOCTYPE html>
 <html lang="sq">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delulu Boutique - Halloween Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-color: #0b0b0e;
-            --text-main: #f4f4f5;
-            --text-muted: #a1a1aa;
-            --border-color: #27272a;
-            --card-bg: #18181b;
-            --accent-orange: #ff7518;
-            --accent-orange-hover: #e05d00;
-            --purple-accent: #8b5cf6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Top Bar - Halloween Theme */
-        .top-announcement {
-            background-color: var(--accent-orange);
-            color: #000;
-            text-align: center;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            padding: 9px 15px;
-            text-transform: uppercase;
-            box-shadow: 0 2px 10px rgba(255, 117, 24, 0.3);
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 6%;
-            background: #121215;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .menu-icon {
-            font-size: 20px;
-            cursor: pointer;
-            color: var(--accent-orange);
-        }
-
-        .header-right {
-            display: flex;
-            gap: 20px;
-            font-size: 18px;
-            align-items: center;
-        }
-
-        .search-icon, .cart-icon {
-            cursor: pointer;
-            position: relative;
-            color: var(--text-main);
-            transition: color 0.2s;
-        }
-
-        .search-icon:hover, .cart-icon:hover {
-            color: var(--accent-orange);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -8px;
-            right: -10px;
-            background: var(--accent-orange);
-            color: #000;
-            font-size: 10px;
-            font-weight: 700;
-            width: 17px;
-            height: 17px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text-main);
-            text-shadow: 0 0 10px rgba(255, 117, 24, 0.4);
-        }
-
-        /* Slide-out Menu (Drawer) */
-        .drawer-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-            visibility: hidden;
-            opacity: 0;
-            transition: 0.3s ease;
-            z-index: 1000;
-        }
-
-        .drawer-overlay.active {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .drawer {
-            position: fixed;
-            top: 0;
-            left: -320px;
-            width: 300px;
-            height: 100%;
-            background: #141417;
-            transition: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 1100;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-            border-right: 1px solid var(--border-color);
-        }
-
-        .drawer.active {
-            left: 0;
-        }
-
-        .drawer-header {
-            padding: 20px 25px;
-            display: flex;
-            justify-content: flex-start;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .drawer-close {
-            font-size: 22px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: var(--accent-orange);
-        }
-
-        .drawer-links {
-            list-style: none;
-            overflow-y: auto;
-        }
-
-        .drawer-links li a {
-            display: block;
-            padding: 18px 25px;
-            text-decoration: none;
-            color: var(--text-main);
-            font-size: 15px;
-            font-weight: 400;
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .drawer-links li a:hover {
-            background: var(--card-bg);
-            color: var(--accent-orange);
-        }
-
-        /* Search Overlay Modal */
-        .search-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 11, 14, 0.98);
-            z-index: 2500;
-            display: flex;
-            flex-direction: column;
-            padding: 40px 8%;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-        }
-
-        .search-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .search-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .search-input-box {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .search-input-box input {
-            width: 100%;
-            padding: 15px 20px 15px 50px;
-            font-size: 18px;
-            border: none;
-            border-bottom: 2px solid var(--accent-orange);
-            background: transparent;
-            color: var(--text-main);
-            outline: none;
-        }
-
-        .search-input-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-            color: var(--accent-orange);
-        }
-
-        .search-results {
-            max-width: 700px;
-            margin: 30px auto 0 auto;
-            width: 100%;
-            max-height: 60vh;
-            overflow-y: auto;
-        }
-
-        .search-result-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            cursor: pointer;
-        }
-
-        .search-result-item img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        /* Views management */
-        .page-view {
-            display: none;
-        }
-        .page-view.active {
-            display: block;
-        }
-
-        /* Hero Image 1 */
-        .hero-banner-img {
-            width: 100%;
-            height: 75vh;
-            min-height: 550px;
-            background: linear-gradient(to bottom, rgba(11,11,14,0.3), rgba(11,11,14,0.8)), url('https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&q=80&w=1400') center/cover no-repeat;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .shop-now-btn {
-            position: relative;
-            z-index: 2;
-            background: var(--accent-orange);
-            color: #000;
-            padding: 16px 36px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 25px rgba(255, 117, 24, 0.5);
-        }
-
-        .shop-now-btn:hover {
-            background: #ffffff;
-            color: #000;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
-        }
-
-        /* Section Title */
-        .section-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin: 60px 0 35px 0;
-            color: var(--accent-orange);
-        }
-
-        /* Slider for Latest Collection */
-        .product-slider-container {
-            padding: 0 6% 60px 6%;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-        }
-
-        .product-slider-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .product-slider {
-            display: flex;
-            gap: 30px;
-            width: max-content;
-        }
-
-        /* Brand Story Section */
-        .brand-story-section {
-            padding: 80px 10%;
-            text-align: center;
-            background: #121215;
-            max-width: 900px;
-            margin: 0 auto;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-        }
-
-        .brand-story-section h2 {
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            color: var(--accent-orange);
-        }
-
-        .brand-story-section h4 {
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .brand-story-section p {
-            font-size: 17px;
-            color: #d4d4d8;
-            line-height: 1.8;
-            font-style: italic;
-            font-family: serif;
-        }
-
-        /* Hero Image 2 */
-        .hero-banner-img-2 {
-            width: 100%;
-            height: 650px;
-            background: linear-gradient(to bottom, rgba(11,11,14,0.4), rgba(11,11,14,0.8)), url('https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&q=80&w=1200') center/cover no-repeat;
-            margin-bottom: 40px;
-        }
-
-        /* Catalog View Styles */
-        .catalog-container {
-            padding: 30px 6% 80px 6%;
-        }
-
-        .breadcrumb-path {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-        }
-
-        .breadcrumb-path a {
-            color: var(--text-main);
-            text-decoration: none;
-        }
-
-        .catalog-header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .catalog-main-title {
-            font-size: 26px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent-orange);
-        }
-
-        .catalog-meta-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            font-size: 14px;
-            color: var(--text-muted);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
-
-        .filter-sort-btn {
-            background: none;
-            border: none;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--accent-orange);
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        /* Filter & Sort Drawer */
-        .filter-drawer {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 350px;
-            height: 100%;
-            background: #141417;
-            z-index: 2200;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.5);
-            transition: 0.35s ease;
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            border-left: 1px solid var(--border-color);
-        }
-
-        .filter-drawer.active {
-            right: 0;
-        }
-
-        .filter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
-
-        .filter-section {
-            margin-bottom: 25px;
-        }
-
-        .filter-section label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            color: var(--accent-orange);
-        }
-
-        .filter-section select, .filter-section input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 14px;
-            outline: none;
-            background: #0b0b0e;
-            color: var(--text-main);
-        }
-
-        .price-inputs {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .apply-filter-btn {
-            width: 100%;
-            background: var(--accent-orange);
-            color: #000;
-            border: none;
-            padding: 14px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-top: 20px;
-            transition: background 0.2s;
-        }
-
-        .apply-filter-btn:hover {
-            background: var(--accent-orange-hover);
-        }
-
-        /* Grid 2 Columns */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-        }
-
-        .product-card {
-            cursor: pointer;
-            text-align: left;
-            width: 100%;
-        }
-
-        .product-slider-container .product-card {
-            width: 280px;
-            scroll-snap-align: start;
-            flex-shrink: 0;
-        }
-
-        .product-img-box {
-            background-color: var(--card-bg);
-            aspect-ratio: 3 / 4;
-            border-radius: 0px;
-            overflow: hidden;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border-color);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product-card:hover .product-img-box {
-            border-color: var(--accent-orange);
-            box-shadow: 0 0 20px rgba(255, 117, 24, 0.25);
-        }
-
-        .product-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .product-card:hover .product-img-box img {
-            transform: scale(1.04);
-        }
-
-        .product-name {
-            font-size: 14px;
-            font-weight: 400;
-            margin-bottom: 4px;
-            color: var(--text-main);
-        }
-
-        .product-price {
-            font-size: 13px;
-            color: var(--accent-orange);
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .product-price span.old-price {
-            text-decoration: line-through;
-            color: var(--text-muted);
-            font-size: 12px;
-            font-weight: 400;
-        }
-
-        /* Modal i Produktit / Add to Cart */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(4px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s;
-        }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-box {
-            background: #141417;
-            border: 1px solid var(--border-color);
-            width: 90%;
-            max-width: 480px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 30px;
-            border-radius: 8px;
-            position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 20px;
-            background: none;
-            border: none;
-            color: var(--accent-orange);
-            cursor: pointer;
-        }
-
-        .modal-img {
-            width: 100%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .modal-title-price {
-            margin-bottom: 20px;
-        }
-
-        .modal-title-price h2 {
-            font-size: 20px;
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: var(--text-main);
-        }
-
-        .modal-title-price p {
-            font-size: 15px;
-            color: var(--accent-orange);
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: var(--text-muted);
-        }
-
-        .form-group select, .qty-container {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            background: #0b0b0e;
-            color: var(--text-main);
-            font-size: 14px;
-            border-radius: 4px;
-            outline: none;
-        }
-
-        .qty-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 130px;
-        }
-
-        .qty-btn {
-            background: none;
-            border: none;
-            font-size: 16px;
-            color: var(--accent-orange);
-            cursor: pointer;
-            padding: 0 8px;
-        }
-
-        .add-to-cart-btn {
-            width: 100%;
-            background: var(--accent-orange);
-            color: #000;
-            border: none;
-            padding: 14px;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background 0.2s;
-            margin-top: 10px;
-        }
-
-        .add-to-cart-btn:hover {
-            background: var(--accent-orange-hover);
-        }
-
-        /* Cart Drawer & Pricing Summary */
-        .cart-drawer {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 380px;
-            height: 100%;
-            background: #141417;
-            z-index: 1200;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.6);
-            transition: 0.35s ease;
-            display: flex;
-            flex-direction: column;
-            border-left: 1px solid var(--border-color);
-        }
-
-        .cart-drawer.active {
-            right: 0;
-        }
-
-        .cart-header {
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-body {
-            padding: 20px;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-        }
-
-        .cart-item-info h4 {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        .cart-item-info p {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .cart-footer {
-            padding: 20px;
-            border-top: 1px solid var(--border-color);
-            background: #0f0f12;
-        }
-
-        /* Cart Promo Code & Totals */
-        .coupon-box {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .coupon-box input {
-            flex: 1;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 13px;
-            text-transform: uppercase;
-            outline: none;
-            background: #0b0b0e;
-            color: var(--text-main);
-        }
-
-        .coupon-box button {
-            background: var(--accent-orange);
-            color: #000;
-            border: none;
-            padding: 10px 16px;
-            font-size: 12px;
-            font-weight: 700;
-            border-radius: 4px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: background 0.2s;
-        }
-
-        .coupon-box button:hover {
-            background: var(--accent-orange-hover);
-        }
-
-        .coupon-status-msg {
-            font-size: 12px;
-            margin-bottom: 12px;
-            font-weight: 500;
-            display: none;
-        }
-
-        .coupon-status-msg.success {
-            color: #4ade80;
-        }
-
-        .coupon-status-msg.error {
-            color: #f87171;
-        }
-
-        .cart-summary {
-            border-top: 1px dashed var(--border-color);
-            padding-top: 12px;
-            margin-bottom: 15px;
-            font-size: 13px;
-        }
-
-        .cart-summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            color: var(--text-muted);
-        }
-
-        .cart-summary-row.discount-row {
-            color: #4ade80;
-            font-weight: 500;
-        }
-
-        .cart-summary-row.total-row {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--accent-orange);
-            border-top: 1px solid var(--border-color);
-            padding-top: 8px;
-            margin-top: 8px;
-        }
-
-        .whatsapp-checkout-btn {
-            display: block;
-            width: 100%;
-            background: #25D366;
-            color: #fff;
-            text-align: center;
-            padding: 14px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: background 0.2s;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-
-        .whatsapp-checkout-btn:hover {
-            background: #1ebd59;
-        }
-
-        /* Wishlist / 10% Discount Section */
-        .wishlist-discount-section {
-            background-color: #121215;
-            padding: 60px 6%;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .wishlist-discount-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .wishlist-discount-section h2 {
-            font-size: 24px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            color: var(--accent-orange);
-        }
-
-        .wishlist-discount-section p {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .wishlist-form {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            max-width: 480px;
-            margin: 0 auto;
-        }
-
-        .wishlist-form input {
-            flex: 1;
-            padding: 14px 18px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 14px;
-            outline: none;
-            background: #0b0b0e;
-            color: var(--text-main);
-        }
-
-        .wishlist-form button {
-            background: var(--accent-orange);
-            color: #000;
-            border: none;
-            padding: 14px 24px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .wishlist-form button:hover {
-            background: var(--accent-orange-hover);
-        }
-
-        .wishlist-success-msg {
-            margin-top: 20px;
-            padding: 12px 20px;
-            background: rgba(74, 222, 128, 0.1);
-            border: 1px solid rgba(74, 222, 128, 0.3);
-            color: #4ade80;
-            font-size: 14px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 40px 6%;
-            text-align: center;
-            background: #09090b;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .footer-socials {
-            display: flex;
-            gap: 25px;
-            font-size: 18px;
-            margin-top: 5px;
-        }
-
-        .footer-socials a {
-            color: var(--accent-orange);
-            transition: color 0.2s;
-        }
-
-        .footer-socials a:hover {
-            color: #fff;
-        }
-
-        /* Animacioni i Lakuriqëve të Natës */
-        @keyframes flyBatAcross {
-            0% {
-                transform: translateX(-80px) translateY(0px) rotate(0deg) scale(0.9);
-            }
-            20% {
-                transform: translateX(25vw) translateY(-35px) rotate(12deg) scale(1.1);
-            }
-            40% {
-                transform: translateX(50vw) translateY(20px) rotate(-10deg) scale(0.95);
-            }
-            60% {
-                transform: translateX(75vw) translateY(-25px) rotate(15deg) scale(1.05);
-            }
-            80% {
-                transform: translateX(90vw) translateY(10px) rotate(-8deg) scale(1);
-            }
-            100% {
-                transform: translateX(105vw) translateY(0px) rotate(0deg) scale(0.9);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-banner-img {
-                height: 50vh;
-            }
-            .hero-banner-img-2 {
-                height: 400px;
-            }
-            .cart-drawer, .filter-drawer {
-                width: 100%;
-                right: -100%;
-            }
-            .wishlist-form {
-                flex-direction: column;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Delulu Boutique | Halloween Edition 🎃</title>
+<meta name="description" content="Zbulo koleksionin e frikshëm të atleteve dhe UGG nga Delulu Boutique. Zgjidh modelin tënd të preferuar dhe porosit online.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --orange: #ff7518;
+  --orange-dark: #e05d00;
+  --purple: #9d4edd;
+  --bg-dark: #0a0a0d;
+  --bg-card: #14141a;
+  --bg-input: #0f0f14;
+  --text-main: #f4f4f6;
+  --text-muted: #a0a0ab;
+  --border: #262633;
+  --sale: #ff7518;
+  --glow: rgba(255, 117, 24, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Halloween Announcement */
+.announcement {
+  background: linear-gradient(90deg, #180a22, var(--orange-dark), #180a22);
+  color: #ffffff;
+  text-align: center;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 12px var(--glow);
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 13, 0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.navbar {
+  max-width: 1400px;
+  margin: auto;
+  padding: 18px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  font-family: "Playfair Display", serif;
+  font-size: 29px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  color: var(--text-main);
+  text-shadow: 0 0 10px var(--glow);
+}
+
+.logo span {
+  color: var(--orange);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 600;
+  transition: color 0.2s;
+  color: var(--text-main);
+}
+
+.nav-links a:hover {
+  color: var(--orange);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-button {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  position: relative;
+  transition: 0.2s;
+}
+
+.icon-button:hover {
+  border-color: var(--orange);
+  box-shadow: 0 0 10px var(--glow);
+}
+
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--orange);
+  color: #000;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.hero {
+  min-height: 600px;
+  padding: 80px 7%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background:
+    linear-gradient(90deg, rgba(10, 10, 13, 0.98) 0%, rgba(10, 10, 13, 0.82) 50%, rgba(10, 10, 13, 0.3) 100%),
+    url("Images1/ugglow1.jpeg") center 45% / cover no-repeat;
+}
+
+.hero-content {
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(44px, 6vw, 76px);
+  line-height: 1.08;
+  margin-bottom: 22px;
+  color: #fff;
+}
+
+.hero h1 span {
+  color: var(--orange);
+  text-shadow: 0 0 15px rgba(255, 117, 24, 0.4);
+}
+
+.hero p {
+  color: var(--text-muted);
+  line-height: 1.8;
+  font-size: 15px;
+  max-width: 450px;
+  margin-bottom: 30px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 14px 24px;
+  border: none;
+  background: var(--orange);
+  color: #000;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  border-radius: 4px;
+  transition: 0.2s;
+  box-shadow: 0 0 15px var(--glow);
+}
+
+.button:hover {
+  background: #ffffff;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.button-light {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+.button-light:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.benefit {
+  padding: 23px 12px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-right: 1px solid var(--border);
+}
+
+.benefit:last-child {
+  border-right: none;
+}
+
+.benefit span {
+  display: block;
+  font-size: 21px;
+  margin-bottom: 7px;
+  color: var(--orange);
+}
+
+.section {
+  max-width: 1400px;
+  margin: auto;
+  padding: 85px 5%;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-heading .eyebrow {
+  margin-bottom: 12px;
+}
+
+.section-heading h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(30px, 4vw, 44px);
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.section-heading p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.category-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.category-card {
+  min-height: 320px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.category-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(10, 10, 13, 0.9), transparent 75%);
+  z-index: -1;
+  transition: 0.3s;
+}
+
+.category-card:hover::before {
+  background: linear-gradient(0deg, rgba(10, 10, 13, 0.95), rgba(10, 10, 13, 0.2));
+}
+
+.category-card h3 {
+  color: white;
+  font-family: "Playfair Display", serif;
+  font-size: 35px;
+  margin-bottom: 8px;
+}
+
+.category-card p {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+.category-card .button {
+  background: var(--orange);
+  color: #000;
+}
+
+.collection-section {
+  background: var(--bg-dark);
+}
+
+.collection-section .section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.collection-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.collection-top h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  color: #fff;
+}
+
+.collection-top p {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.search-sort {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search-input,
+.sort-select {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 12px 14px;
+  font-size: 12px;
+  outline: none;
+  border-radius: 4px;
+  min-width: 170px;
+}
+
+.search-input:focus,
+.sort-select:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 8px var(--glow);
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 25px 0 35px;
+}
+
+.filter-button {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 11px 22px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.filter-button.active,
+.filter-button:hover {
+  background: var(--orange);
+  color: #000;
+  border-color: var(--orange);
+  box-shadow: 0 0 10px var(--glow);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px 18px;
+}
+
+.product-card {
+  min-width: 0;
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  border-color: var(--orange);
+  box-shadow: 0 0 15px var(--glow);
+}
+
+.product-image-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #0f0f14;
+  aspect-ratio: 3 / 4;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.04);
+}
+
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--orange);
+  color: #000;
+  padding: 6px 9px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  border-radius: 3px;
+}
+
+.wishlist-button {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 34px;
+  height: 34px;
+  background: rgba(10, 10, 13, 0.8);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  border-radius: 50%;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.wishlist-button.liked {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.product-info {
+  padding: 16px;
+}
+
+.product-category {
+  color: var(--text-muted);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.product-name {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 11px;
+  line-height: 1.5;
+  min-height: 20px;
+  color: #fff;
+}
+
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--orange);
+}
+
+.old-price {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.size-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-size: 12px;
+  margin-bottom: 9px;
+  outline: none;
+  border-radius: 4px;
+}
+
+.add-button {
+  width: 100%;
+  padding: 12px 8px;
+  border: 1px solid var(--orange);
+  background: var(--orange);
+  color: #000;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.add-button:hover {
+  background: #fff;
+  border-color: #fff;
+}
+
+.empty-results {
+  text-align: center;
+  padding: 50px 10px;
+  color: var(--text-muted);
+  grid-column: 1 / -1;
+}
+
+.reviews {
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.reviews .section {
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.review-card {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px;
+}
+
+.stars {
+  color: var(--orange);
+  letter-spacing: 3px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.review-card p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.review-card h4 {
+  font-size: 12px;
+  color: #fff;
+}
+
+.review-card small {
+  color: var(--text-muted);
+  display: block;
+  margin-top: 5px;
+}
+
+.wishlist-section {
+  background: var(--bg-dark);
+}
+
+.wishlist-box {
+  max-width: 720px;
+  margin: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 40px;
+  text-align: center;
+}
+
+.wishlist-box h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 35px;
+  margin-bottom: 14px;
+  color: #fff;
+}
+
+.wishlist-box p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.wishlist-form {
+  display: flex;
+  gap: 10px;
+}
+
+.wishlist-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-input);
+  color: var(--text-main);
+  outline: none;
+  border-radius: 4px;
+}
+
+.form-message {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--purple);
+}
+
+footer {
+  background: #060608;
+  color: var(--text-main);
+  padding: 55px 5% 22px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-grid {
+  max-width: 1300px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 45px;
+  padding-bottom: 40px;
+}
+
+.footer-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.footer-logo span {
+  color: var(--orange);
+}
+
+.footer-description {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.9;
+  max-width: 350px;
+}
+
+.footer-column h4 {
+  font-size: 12px;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+  color: var(--orange);
+}
+
+.footer-column a {
+  display: block;
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-bottom: 13px;
+}
+
+.footer-column a:hover {
+  color: white;
+}
+
+.copyright {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* Cart drawer */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.25s;
+}
+
+.overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-drawer {
+  position: fixed;
+  z-index: 201;
+  top: 0;
+  right: 0;
+  width: min(440px, 100%);
+  height: 100%;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  transform: translateX(100%);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-drawer.open {
+  transform: translateX(0);
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 25px;
+  color: var(--orange);
+}
+
+.close-button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.empty-cart {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 60px 15px;
+  line-height: 1.8;
+  font-size: 13px;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 13px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item img {
+  width: 80px;
+  height: 95px;
+  object-fit: cover;
+  background: #0f0f14;
+  border-radius: 4px;
+}
+
+.cart-item h4 {
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: 7px;
+  color: #fff;
+}
+
+.cart-item p {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.cart-item-price {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--orange);
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--border);
+  background: var(--bg-dark);
+  color: var(--text-main);
+  border-radius: 3px;
+}
+
+.quantity-controls span {
+  font-size: 12px;
+}
+
+.remove-item {
+  border: none;
+  background: transparent;
+  color: #f87171;
+  font-size: 11px;
+  margin-top: 9px;
+}
+
+.cart-footer {
+  border-top: 1px solid var(--border);
+  padding: 20px;
+  background: #0d0d12;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  margin-bottom: 17px;
+  font-size: 15px;
+  color: var(--orange);
+}
+
+.cart-note {
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.checkout-button {
+  width: 100%;
+}
+
+/* Checkout modal */
+.modal {
+  position: fixed;
+  z-index: 300;
+  inset: 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.2s;
+}
+
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: min(480px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 30px;
+  position: relative;
+}
+
+.modal-content h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--orange);
+}
+
+.modal-content > p {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  margin-bottom: 23px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 7px;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  outline: none;
+  background: var(--bg-input);
+  color: var(--text-main);
+  font-size: 13px;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 75px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--orange);
+}
+
+.checkout-submit {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.toast {
+  position: fixed;
+  z-index: 500;
+  bottom: 25px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background: var(--orange);
+  color: #000;
+  font-weight: 700;
+  padding: 14px 22px;
+  font-size: 12px;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.25s;
+  text-align: center;
+  width: max-content;
+  max-width: 90%;
+  box-shadow: 0 0 15px var(--glow);
+}
+
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* Flying Bats Animation */
+@keyframes flyBatAcross {
+  0% {
+    transform: translateX(-80px) translateY(0px) rotate(0deg) scale(0.9);
+  }
+  20% {
+    transform: translateX(25vw) translateY(-35px) rotate(12deg) scale(1.1);
+  }
+  40% {
+    transform: translateX(50vw) translateY(20px) rotate(-10deg) scale(0.95);
+  }
+  60% {
+    transform: translateX(75vw) translateY(-25px) rotate(15deg) scale(1.05);
+  }
+  80% {
+    transform: translateX(90vw) translateY(10px) rotate(-8deg) scale(1);
+  }
+  100% {
+    transform: translateX(105vw) translateY(0px) rotate(0deg) scale(0.9);
+  }
+}
+
+@media (max-width: 1000px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 700px) {
+  .navbar {
+    padding: 14px 5%;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 23px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    padding: 22px 5%;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-actions {
+    gap: 7px;
+  }
+
+  .icon-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hero {
+    min-height: 520px;
+    padding: 55px 6%;
+    background-position: 58% center;
+  }
+
+  .hero h1 {
+    font-size: 46px;
+  }
+
+  .hero p {
+    font-size: 13px;
+    max-width: 300px;
+  }
+
+  .benefit {
+    font-size: 10px;
+    padding: 18px 7px;
+  }
+
+  .section {
+    padding: 60px 5%;
+  }
+
+  .category-cards {
+    gap: 12px;
+  }
+
+  .category-card {
+    min-height: 245px;
+    padding: 17px;
+  }
+
+  .category-card h3 {
+    font-size: 26px;
+  }
+
+  .category-card p {
+    font-size: 11px;
+  }
+
+  .collection-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .collection-top h2 {
+    font-size: 31px;
+  }
+
+  .search-sort {
+    width: 100%;
+  }
+
+  .search-input,
+  .sort-select {
+    min-width: 0;
+    flex: 1;
+    width: 50%;
+  }
+
+  .filters {
+    justify-content: flex-start;
+    gap: 7px;
+    margin: 20px 0 25px;
+  }
+
+  .filter-button {
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 12px;
+  }
+
+  .product-info {
+    padding-top: 11px;
+  }
+
+  .product-name {
+    font-size: 12px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .old-price {
+    font-size: 11px;
+  }
+
+  .product-badge {
+    top: 8px;
+    left: 8px;
+    font-size: 8px;
+    padding: 5px 7px;
+  }
+
+  .wishlist-button {
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .add-button {
+    font-size: 10px;
+    padding: 11px 4px;
+  }
+
+  .review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wishlist-box {
+    padding: 28px 18px;
+  }
+
+  .wishlist-box h2 {
+    font-size: 29px;
+  }
+
+  .wishlist-form {
+    flex-direction: column;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 20px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 380px) {
+  .logo {
+    font-size: 20px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .category-card h3 {
+    font-size: 22px;
+  }
+
+  .filter-button {
+    padding: 9px 10px;
+  }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="top-announcement">
-        🎃 HALLOWEEN SPECIAL SALE - DELULU BOUTIQUE 🎃
+<div class="announcement">
+  🎃 HALLOWEEN SPECIAL SALE · DELULU BOUTIQUE · YOUR STYLE, YOUR RULES 🦇
+</div>
+
+<header>
+  <nav class="navbar">
+    <a href="#home" class="logo">delulu<span>.</span></a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">KRYEFAQJA</a>
+      <a href="#categories">KATEGORITË</a>
+      <a href="#collection">KOLEKSIONI</a>
+      <a href="#reviews">REVIEW</a>
+      <a href="#wishlist">WISHLIST</a>
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="menu-icon" onclick="toggleDrawer()">
-            <i class="fa-solid fa-bars"></i>
-        </div>
-        <a href="#" class="logo" onclick="goHome(); return false;">DELULU</a>
-        <div class="header-right">
-            <div class="search-icon" onclick="toggleSearch()">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div class="cart-icon" onclick="toggleCart()">
-                <i class="fa-solid fa-bag-shopping"></i>
-                <span class="cart-count" id="cartCount">0</span>
-            </div>
-        </div>
-    </header>
+    <div class="nav-actions">
+      <button class="icon-button menu-toggle" id="menuToggle" aria-label="Hap menunë">☰</button>
+      <button class="icon-button" id="cartButton" aria-label="Hap shportën">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
 
-    <!-- Drawer Menu -->
-    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer()"></div>
-    <div class="drawer" id="sideDrawer">
-        <div class="drawer-header">
-            <button class="drawer-close" onclick="toggleDrawer()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <ul class="drawer-links">
-            <li><a href="#" onclick="goHome(); toggleDrawer();">Home</a></li>
-            <li><a href="#" onclick="openCatalog('all'); toggleDrawer();">All Products</a></li>
-            <li><a href="#" onclick="openCatalog('New Balance'); toggleDrawer();">New Balance</a></li>
-            <li><a href="#" onclick="openCatalog('Adidas'); toggleDrawer();">Adidas</a></li>
-            <li><a href="#" onclick="openCatalog('Nike'); toggleDrawer();">Nike</a></li>
-            <li><a href="#" onclick="openCatalog('Jordan'); toggleDrawer();">Jordan</a></li>
-            <li><a href="#" onclick="openCatalog('Puma'); toggleDrawer();">Puma</a></li>
-            <li><a href="#" onclick="openCatalog('Asics'); toggleDrawer();">Asics</a></li>
-            <li><a href="#" onclick="openCatalog('MiuMiu'); toggleDrawer();">MiuMiu</a></li>
-            <li><a href="#" onclick="openCatalog('UGG'); toggleDrawer();">UGG</a></li>
-        </ul>
+<main>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">🎃 Your next favorite pair</div>
+
+      <h1>Dress like<br>you're in your<br><span>delulu era.</span> 🦇</h1>
+
+      <p>
+        Modele që të bëjnë të ndihesh ndryshe. Zbulo koleksionin
+        tonë të atleteve dhe UGG për çdo ditë, çdo stil dhe çdo mood.
+      </p>
+
+      <a href="#collection" class="button">ZBULO KOLEKSIONIN ↗</a>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits">
+    <div class="benefit">
+      <span>🎃</span>
+      Modele për çdo stil
     </div>
 
-    <!-- Search Modal -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-top">
-            <a href="#" class="logo" onclick="toggleSearch(); return false;">DELULU</a>
-            <button class="drawer-close" onclick="toggleSearch()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="search-input-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="searchInput" placeholder="Kërko produkt..." oninput="handleSearch(this.value)">
-        </div>
-        <div class="search-results" id="searchResults">
-            <p style="color: #888; text-align: center; margin-top: 30px; font-size: 14px;">Shkruani emrin e produktit për të kërkuar...</p>
-        </div>
+    <div class="benefit">
+      <span>👻</span>
+      Porosi të thjeshta
     </div>
 
-    <!-- Cart Drawer -->
-    <div class="drawer-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-    <div class="cart-drawer" id="cartDrawer">
-        <div class="cart-header">
-            <h3>Shporta Juaj 🎃</h3>
-            <button class="drawer-close" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="cart-body" id="cartBody">
-            <p style="color: #888; font-size: 13px; text-align: center; margin-top: 40px;">Shporta është boshe.</p>
-        </div>
-        <div class="cart-footer" id="cartFooter" style="display: none;">
-            <!-- Kodi i Uljes -->
-            <div class="coupon-box">
-                <input type="text" id="couponInput" placeholder="Vendos kodin e uljes">
-                <button onclick="applyCoupon()">Apliko</button>
-            </div>
-            <div id="couponStatusMsg" class="coupon-status-msg"></div>
+    <div class="benefit">
+      <span>🦇</span>
+      Na kontakto në WhatsApp
+    </div>
+  </section>
 
-            <!-- Përmbledhja e Çmimeve -->
-            <div class="cart-summary" id="cartSummary">
-                <!-- Pasqyrohen dinamikisht në JS -->
-            </div>
-
-            <a href="#" id="whatsappBtn" class="whatsapp-checkout-btn" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> Porosit në WhatsApp
-            </a>
-        </div>
+  <!-- CATEGORIES -->
+  <section class="section" id="categories">
+    <div class="section-heading">
+      <div class="eyebrow">Find your vibe</div>
+      <h2>Shop by category 🕸️</h2>
+      <p>Zgjidh stilin që të përfaqëson.</p>
     </div>
 
-    <!-- Filter & Sort Drawer -->
-    <div class="drawer-overlay" id="filterOverlay" onclick="toggleFilterDrawer()"></div>
-    <div class="filter-drawer" id="filterDrawer">
-        <div class="filter-header">
-            <h3>Filter & Sort</h3>
-            <button class="drawer-close" onclick="toggleFilterDrawer()"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        
-        <div class="filter-section">
-            <label>Renditja (Sort By)</label>
-            <select id="sortSelect">
-                <option value="default">Zgjidh...</option>
-                <option value="low-high">Çmimi: I ulët në të lartë</option>
-                <option value="high-low">Çmimi: I lartë në të ulët</option>
-            </select>
+    <div class="category-cards">
+      <div class="category-card" style="background-image:url('Images1/ugglow1.jpeg')">
+        <h3>UGG Collection</h3>
+        <p>Cozy, cute & always in style.</p>
+
+        <button class="button" onclick="setCategory('uggs')">SHIKO UGG ↗</button>
+      </div>
+
+      <div class="category-card" style="background-image:url('Images1/dunk1.jpeg')">
+        <h3>Sneakers</h3>
+        <p>Your everyday statement pair.</p>
+
+        <button class="button" onclick="setCategory('sneakers')">SHIKO ATLETET ↗</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTION -->
+  <section class="collection-section" id="collection">
+    <div class="section">
+      <div class="collection-top">
+        <div>
+          <h2>Halloween Collection 🎃</h2>
+          <p>Gjej palën tënde të preferuar.</p>
         </div>
 
-        <div class="filter-section">
-            <label>Çmimi (Price Range - ALL)</label>
-            <div class="price-inputs">
-                <input type="number" id="minPrice" placeholder="Min (psh 500)">
-                <span>-</span>
-                <input type="number" id="maxPrice" placeholder="Max (psh 15000)">
-            </div>
+        <div class="search-sort">
+          <input
+            type="search"
+            class="search-input"
+            id="searchInput"
+            placeholder="Kërko produkt..."
+            aria-label="Kërko produkt"
+          >
+
+          <select class="sort-select" id="sortSelect" aria-label="Rendit produktet">
+            <option value="default">Renditja: Default</option>
+            <option value="price-low">Çmimi: Nga më i ulëti</option>
+            <option value="price-high">Çmimi: Nga më i larti</option>
+            <option value="name">Emri: A–Z</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filters">
+        <button class="filter-button active" data-category="all">Të gjitha</button>
+        <button class="filter-button" data-category="uggs">UGG</button>
+        <button class="filter-button" data-category="sneakers">Sneakers</button>
+        <button class="filter-button" data-category="wishlist">🎃 Wishlist</button>
+      </div>
+
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="section">
+      <div class="section-heading">
+        <div class="eyebrow">Love from our community</div>
+        <h2>Delulu girls say it best 👻</h2>
+        <p>Një hap më afër stilit tënd të preferuar.</p>
+      </div>
+
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “Shumë të bukura! Modeli ishte tamam siç e prisja.
+            Më pëlqeu shumë dhe komunikimi ishte shumë i lehtë.”
+          </p>
+          <h4>Kliente e Delulu</h4>
+          <small>Review</small>
         </div>
 
-        <button class="apply-filter-btn" onclick="applyFilters()">Apliko</button>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “Më në fund gjeta modelin që kërkoja.
+            Procesi i porosisë ishte i thjeshtë dhe i shpejtë.”
+          </p>
+          <h4>Kliente e Delulu</h4>
+          <small>Review</small>
+        </div>
+
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>
+            “UGG-t janë shumë cute! Do të porosisja përsëri.
+            Ka disa modele shumë të bukura për të zgjedhur.”
+          </p>
+          <h4>Kliente e Delulu</h4>
+          <small>Review</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WISHLIST / EMAIL -->
+  <section class="wishlist-section" id="wishlist">
+    <div class="section">
+      <div class="wishlist-box">
+        <div class="eyebrow">Stay in your delulu era</div>
+        <h2>Your wishlist starts here 🎃</h2>
+
+        <p>
+          Regjistro email-in tënd për të shprehur interesin
+          për modelet e preferuara dhe për të marrë përditësime
+          nga Delulu Boutique.
+        </p>
+
+        <form class="wishlist-form" id="wishlistForm">
+          <input
+            type="email"
+            id="wishlistEmail"
+            placeholder="Shkruaj email-in tënd"
+            required
+          >
+          <button class="button" type="submit">REGJISTROHU ↗</button>
+        </form>
+
+        <div class="form-message" id="wishlistMessage"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">delulu<span>.</span></div>
+      <p class="footer-description">
+        Your style, your rules. Zbulo koleksionin e Delulu Boutique
+        dhe gjej modelin që i përshtatet stilit tënd.
+      </p>
     </div>
 
-    <!-- ================= 1. HOME VIEW ================= -->
-    <div id="homeView" class="page-view active">
-        <div class="hero-banner-img">
-            <a href="#" class="shop-now-btn" onclick="openCatalog('all'); return false;">Shop Now 🎃</a>
-        </div>
-
-        <div class="section-title">Latest Halloween Collection 🦇</div>
-
-        <div class="product-slider-container">
-            <div class="product-slider" id="homeSlider">
-                <!-- UGG Low të parat -->
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Low Brown', 'ALL 2,900.00', 'Images1/ugglow1.jpeg')">
-                    <div class="product-img-box"><img src="Images1/ugglow1.jpeg" alt="UGG Low Brown"></div>
-                    <div class="product-name">UGG Low Brown</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Low Dark Brown', 'ALL 2,900.00', 'Images1/ugglow2.jpeg')">
-                    <div class="product-img-box"><img src="Images1/ugglow2.jpeg" alt="UGG Low Dark Brown"></div>
-                    <div class="product-name">UGG Low Dark Brown</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Low Beige', 'ALL 2,900.00', 'Images1/ugglow3.jpeg')">
-                    <div class="product-img-box"><img src="Images1/ugglow3.jpeg" alt="UGG Low Beige"></div>
-                    <div class="product-name">UGG Low Beige</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <!-- Produktet e tjera -->
-                <div class="product-card" data-brand="Nike" data-price="3900" onclick="openProductModal('Nike Dunk Burgunday', 'ALL 3,900.00', 'Images1/dunk2.jpeg')">
-                    <div class="product-img-box"><img src="Images1/dunk2.jpeg" alt="Nike Dunk Burgunday"></div>
-                    <div class="product-name">Nike Dunk Burgunday</div>
-                    <div class="product-price">ALL 3,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Adidas" data-price="4900" onclick="openProductModal('Adidas Spezial-Brown', 'ALL 4,900.00', 'Images1/adidas2.jpeg')">
-                    <div class="product-img-box"><img src="Images1/adidas2.jpeg" alt="Adidas Spezial-Brown"></div>
-                    <div class="product-name">Adidas Spezial-Brown</div>
-                    <div class="product-price">ALL 4,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Jordan" data-price="3900" onclick="openProductModal('Jordan 1- Black', 'ALL 3,900.00', 'Images1/Jordan2.jpeg')">
-                    <div class="product-img-box"><img src="Images1/Jordan2.jpeg" alt="Jordan 1- Black"></div>
-                    <div class="product-name">Jordan 1- Black</div>
-                    <div class="product-price">ALL 3,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Tazz - Dark Brown', 'ALL 2,900.00', 'Images1/ugg3.jpeg')">
-                    <div class="product-img-box"><img src="Images1/ugg3.jpeg" alt="UGG Tazz - Dark Brown"></div>
-                    <div class="product-name">UGG Tazz - Dark Brown</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="New Balance" data-price="4500" onclick="openProductModal('New Balance 1', 'ALL 4,500.00', 'Images1/newbalance2.jpeg')">
-                    <div class="product-img-box"><img src="Images1/newbalance2.jpeg" alt="New Balance 1"></div>
-                    <div class="product-name">New Balance 1</div>
-                    <div class="product-price">ALL 4,500.00 <span class="old-price">ALL 13,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Nike" data-price="2900" onclick="openProductModal('Nike AF1', 'ALL 2,900.00', 'Images1/nikeaf1.jpeg')">
-                    <div class="product-img-box"><img src="Images1/nikeaf1.jpeg" alt="Nike AF1"></div>
-                    <div class="product-name">Nike AF1</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Adidas" data-price="4900" onclick="openProductModal('Adidas Spezial-Dark Blue', 'ALL 4,900.00', 'Images1/adidas1.jpeg')">
-                    <div class="product-img-box"><img src="Images1/adidas1.jpeg" alt="Adidas Spezial-Dark Blue"></div>
-                    <div class="product-name">Adidas Spezial-Dark Blue</div>
-                    <div class="product-price">ALL 4,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Beige', 'ALL 2,900.00', 'Images1/uggll1.jpeg')">
-                    <div class="product-img-box"><img src="Images1/uggll1.jpeg" alt="UGG Beige"></div>
-                    <div class="product-name">UGG Beige</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Nike" data-price="3900" onclick="openProductModal('Nike Dunk White', 'ALL 3,900.00', 'Images1/dunk1.jpeg')">
-                    <div class="product-img-box"><img src="Images1/dunk1.jpeg" alt="Nike Dunk White"></div>
-                    <div class="product-name">Nike Dunk White</div>
-                    <div class="product-price">ALL 3,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Jordan" data-price="3900" onclick="openProductModal('Jordan 1-Skye Blue', 'ALL 3,900.00', 'Images1/Jordan1.jpeg')">
-                    <div class="product-img-box"><img src="Images1/Jordan1.jpeg" alt="Jordan 1-Skye Blue"></div>
-                    <div class="product-name">Jordan 1-Skye Blue</div>
-                    <div class="product-price">ALL 3,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Tazz - Dark Brown', 'ALL 2,900.00', 'Images1/ugg1.jpeg')">
-                    <div class="product-img-box"><img src="Images1/ugg1.jpeg" alt="UGG Tazz - Dark Brown"></div>
-                    <div class="product-name">UGG Tazz - Dark Brown</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Adidas" data-price="4900" onclick="openProductModal('Adidas Spezial-Red', 'ALL 4,900.00', 'Images1/adidas3.jpeg')">
-                    <div class="product-img-box"><img src="Images1/adidas3.jpeg" alt="Adidas Spezial-Red"></div>
-                    <div class="product-name">Adidas Spezial-Red</div>
-                    <div class="product-price">ALL 4,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Brown', 'ALL 2,900.00', 'Images1/uggll2.jpeg')">
-                    <div class="product-img-box"><img src="Images1/uggll2.jpeg" alt="UGG Brown"></div>
-                    <div class="product-name">UGG Brown</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Tazz - Black', 'ALL 2,900.00', 'Images1/ugg2.jpeg')">
-                    <div class="product-img-box"><img src="Images1/ugg2.jpeg" alt="UGG Tazz - Black"></div>
-                    <div class="product-name">UGG Tazz - Black</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="Nike" data-price="3900" onclick="openProductModal('Nike Dunk Pink', 'ALL 3,900.00', 'Images1/dunk3.jpeg')">
-                    <div class="product-img-box"><img src="Images1/dunk3.jpeg" alt="Nike Dunk Pink"></div>
-                    <div class="product-name">Nike Dunk Pink</div>
-                    <div class="product-price">ALL 3,900.00 <span class="old-price">ALL 9,000.00</span></div>
-                </div>
-
-                <div class="product-card" data-brand="UGG" data-price="2900" onclick="openProductModal('UGG Tazz - Brown', 'ALL 2,900.00', 'Images1/ugg4.jpeg')">
-                    <div class="product-img-box"><img src="Images1/ugg4.jpeg" alt="UGG Tazz - Brown"></div>
-                    <div class="product-name">UGG Tazz - Brown</div>
-                    <div class="product-price">ALL 2,900.00 <span class="old-price">ALL 6,500.00</span></div>
-                </div>
-            </div>
-        </div>
-             
-        <div class="brand-story-section">
-            <h2>Delulu Boutique</h2>
-            <h4>Designed for your everyday style</h4>
-            <p>Delulu Boutique is built around carefully curated sneaker collections, designed for effortless everyday style and long-lasting comfort. Each pair is selected with attention to detail, quality and wearability. Our goal is to offer sneakers that feel as good as they look. We introduce new styles weekly, bringing you the latest releases and the most in-demand viral sneaker trends.</p>
-        </div>
-
-        <div class="hero-banner-img-2"></div>
+    <div class="footer-column">
+      <h4>QUICK LINKS</h4>
+      <a href="#home">Kryefaqja</a>
+      <a href="#categories">Kategoritë</a>
+      <a href="#collection">Koleksioni</a>
+      <a href="#wishlist">Wishlist</a>
     </div>
 
-    <!-- ================= 2. CATALOG VIEW ================= -->
-    <div id="catalogView" class="page-view">
-        <div class="catalog-container">
-            <div class="breadcrumb-path">
-                <a href="#" onclick="goHome(); return false;">Home</a> > <span id="breadcrumbCategory">All Products</span>
-            </div>
+    <div class="footer-column">
+      <h4>NA KONTAKTO</h4>
+      <a href="https://www.instagram.com/delulu_boutique_al/" target="_blank" rel="noopener">
+        Instagram
+      </a>
+      <a href="https://wa.me/18194867799" target="_blank" rel="noopener">
+        WhatsApp: +1 (819) 486-7799
+      </a>
+    </div>
+  </div>
 
-            <div class="catalog-header-top">
-                <div class="catalog-main-title" id="catalogTitle">All Products</div>
-            </div>
+  <div class="copyright">
+    © <span id="currentYear"></span> Delulu Boutique. All rights reserved. 🎃
+  </div>
+</footer>
 
-            <div class="catalog-meta-bar">
-                <span id="productCount">0 products</span>
-                <button class="filter-sort-btn" onclick="toggleFilterDrawer()">Filter & Sort</button>
-            </div>
+<!-- CART OVERLAY -->
+<div class="overlay" id="cartOverlay"></div>
 
-            <div class="product-grid" id="catalogGrid"></div>
-        </div>
+<!-- CART DRAWER -->
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shporta">
+  <div class="cart-header">
+    <h2>Shporta ime 🛒🎃</h2>
+    <button class="close-button" id="closeCart" aria-label="Mbyll shportën">×</button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Totali</span>
+      <span id="cartTotal">0 Lekë</span>
     </div>
 
-    <!-- Modal i Produktit -->
-    <div class="modal-overlay" id="productModal" onclick="closeModalOutside(event)">
-        <div class="modal-box">
-            <button class="modal-close-btn" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
-            <img class="modal-img" id="modalImg" src="" alt="Product">
-            <div class="modal-title-price">
-                <h2 id="modalTitle">Emri</h2>
-                <p id="modalPrice">Çmimi</p>
-            </div>
+    <p class="cart-note">
+      Kostoja e transportit, nëse aplikohet, konfirmohet gjatë porosisë.
+    </p>
 
-            <div class="form-group">
-                <label>Size. *</label>
-                <select id="sizeSelect">
-                    <option value="">Select</option>
-                    <option value="36">36</option>
-                    <option value="37">37</option>
-                    <option value="38">38</option>
-                    <option value="39">39</option>
-                    <option value="40">40</option>
-                    <option value="41">41</option>
-                </select>
-            </div>
+    <button class="button checkout-button" id="checkoutButton">
+      VAZHDO ME POROSINË ↗
+    </button>
+  </div>
+</aside>
 
-            <div class="form-group">
-                <label>Quantity *</label>
-                <div class="qty-container">
-                    <button class="qty-btn" onclick="decrementQty()">-</button>
-                    <span id="qtyValue">1</span>
-                    <button class="qty-btn" onclick="incrementQty()">+</button>
-                </div>
-            </div>
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkoutModal">
+  <div class="modal-content">
+    <button class="close-button" id="closeCheckout" aria-label="Mbyll" style="position:absolute;right:20px;top:20px;">×</button>
 
-            <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+    <h2>Përfundo porosinë 🎃</h2>
+    <p>
+      Plotëso të dhënat dhe vazhdo në WhatsApp për të dërguar porosinë.
+    </p>
+
+    <form id="checkoutForm">
+      <div class="form-group">
+        <label for="customerName">Emri dhe mbiemri</label>
+        <input id="customerName" type="text" required placeholder="Emri yt">
+      </div>
+
+      <div class="form-group">
+        <label for="customerPhone">Numri i telefonit</label>
+        <input id="customerPhone" type="tel" required placeholder="06X XX XX XXX">
+      </div>
+
+      <div class="form-group">
+        <label for="customerAddress">Adresa e dërgesës</label>
+        <textarea id="customerAddress" required placeholder="Qyteti, rruga dhe adresa"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="customerNotes">Shënime (opsionale)</label>
+        <textarea id="customerNotes" placeholder="Shënime për porosinë..."></textarea>
+      </div>
+
+      <button type="submit" class="button checkout-submit">
+        DËRGO POROSINË NË WHATSAPP ↗
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  {
+    id: 1,
+    name: "UGG Low Brown",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/ugglow1.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 2,
+    name: "UGG Low Dark Brown",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/ugglow2.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 3,
+    name: "UGG Low Beige",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/ugglow3.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 4,
+    name: "Nike Dunk Burgundy",
+    category: "sneakers",
+    price: 3900,
+    oldPrice: 9000,
+    image: "Images1/dunk2.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 5,
+    name: "Adidas Spezial Brown",
+    category: "sneakers",
+    price: 4900,
+    oldPrice: 9000,
+    image: "Images1/adidas2.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 6,
+    name: "Jordan 1 Black",
+    category: "sneakers",
+    price: 3900,
+    oldPrice: 9000,
+    image: "Images1/Jordan2.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 7,
+    name: "UGG Tazz Dark Brown",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/ugg3.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 8,
+    name: "New Balance 1",
+    category: "sneakers",
+    price: 4500,
+    oldPrice: 13000,
+    image: "Images1/newbalance2.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 9,
+    name: "Nike AF1",
+    category: "sneakers",
+    price: 2900,
+    oldPrice: 6500,
+    image: "Images1/nikeaf1.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 10,
+    name: "Adidas Spezial Dark Blue",
+    category: "sneakers",
+    price: 4900,
+    oldPrice: 9000,
+    image: "Images1/adidas1.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 11,
+    name: "UGG Beige",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/uggll1.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 12,
+    name: "Nike Dunk White",
+    category: "sneakers",
+    price: 3900,
+    oldPrice: 9000,
+    image: "Images1/dunk1.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 13,
+    name: "Jordan 1 Sky Blue",
+    category: "sneakers",
+    price: 3900,
+    oldPrice: 9000,
+    image: "Images1/Jordan1.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 14,
+    name: "UGG Tazz Dark Brown",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/ugg1.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 15,
+    name: "Adidas Spezial Red",
+    category: "sneakers",
+    price: 4900,
+    oldPrice: 9000,
+    image: "Images1/adidas3.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 16,
+    name: "UGG Brown",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/uggll2.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 17,
+    name: "UGG Tazz Black",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/ugg2.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 18,
+    name: "Nike Dunk Pink",
+    category: "sneakers",
+    price: 3900,
+    oldPrice: 9000,
+    image: "Images1/dunk3.jpeg",
+    badge: "Sale 🎃"
+  },
+  {
+    id: 19,
+    name: "UGG Tazz Brown",
+    category: "uggs",
+    price: 3000,
+    oldPrice: 6500,
+    image: "Images1/ugg4.jpeg",
+    badge: "Sale 🎃"
+  }
+];
+
+const availableSizes = [36, 37, 38, 39, 40, 41];
+
+let currentCategory = "all";
+let cart = [];
+let wishlist = [];
+
+const productGrid = document.getElementById("productGrid");
+const searchInput = document.getElementById("searchInput");
+const sortSelect = document.getElementById("sortSelect");
+
+const cartDrawer = document.getElementById("cartDrawer");
+const cartOverlay = document.getElementById("cartOverlay");
+const cartItemsContainer = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+
+const checkoutModal = document.getElementById("checkoutModal");
+
+// Generate Flying Bats
+function initHalloweenBats() {
+  const batsContainer = document.createElement("div");
+  batsContainer.id = "batsContainer";
+  batsContainer.style.cssText = "position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;overflow:hidden;";
+  document.body.appendChild(batsContainer);
+
+  const batCount = 14;
+  for (let i = 0; i < batCount; i++) {
+    createBat(batsContainer);
+  }
+}
+
+function createBat(container) {
+  const bat = document.createElement("div");
+  bat.className = "floating-bat";
+  bat.innerText = "🦇";
+  
+  const startTop = Math.random() * 85;
+  const size = 18 + Math.random() * 26;
+  const duration = 7 + Math.random() * 11;
+  const delay = Math.random() * 12;
+  const opacity = 0.35 + Math.random() * 0.55;
+
+  bat.style.cssText = `
+    position: absolute;
+    top: ${startTop}vh;
+    left: -80px;
+    font-size: ${size}px;
+    opacity: ${opacity};
+    animation: flyBatAcross ${duration}s linear ${delay}s infinite;
+    user-select: none;
+    pointer-events: none;
+    filter: drop-shadow(0 0 8px rgba(255, 117, 24, 0.7));
+  `;
+
+  container.appendChild(bat);
+}
+
+function formatPrice(price) {
+  return price.toLocaleString("sq-AL") + " Lekë";
+}
+
+function getCategoryName(category) {
+  return category === "uggs" ? "UGG Collection" : "Sneakers";
+}
+
+function renderProducts() {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  let filteredProducts = [...products];
+
+  if (currentCategory === "uggs" || currentCategory === "sneakers") {
+    filteredProducts = filteredProducts.filter(
+      product => product.category === currentCategory
+    );
+  }
+
+  if (currentCategory === "wishlist") {
+    filteredProducts = filteredProducts.filter(
+      product => wishlist.includes(product.id)
+    );
+  }
+
+  if (searchTerm) {
+    filteredProducts = filteredProducts.filter(product =>
+      product.name.toLowerCase().includes(searchTerm) ||
+      getCategoryName(product.category).toLowerCase().includes(searchTerm)
+    );
+  }
+
+  const sortValue = sortSelect.value;
+
+  if (sortValue === "price-low") {
+    filteredProducts.sort((a, b) => a.price - b.price);
+  } else if (sortValue === "price-high") {
+    filteredProducts.sort((a, b) => b.price - a.price);
+  } else if (sortValue === "name") {
+    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  if (filteredProducts.length === 0) {
+    productGrid.innerHTML = `
+      <div class="empty-results">
+        <h3 style="margin-bottom:10px;">Nuk u gjet asnjë produkt 🎃</h3>
+        <p>Provo një kërkim tjetër ose zgjidh një kategori tjetër.</p>
+      </div>
+    `;
+    return;
+  }
+
+  productGrid.innerHTML = filteredProducts.map(product => `
+    <article class="product-card">
+      <div class="product-image-wrap">
+        <img
+          src="${product.image}"
+          alt="${product.name}"
+          class="product-image"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='https://placehold.co/600x800/14141a/a0a0ab?text=Delulu+Boutique';"
+        >
+
+        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ""}
+
+        <button
+          class="wishlist-button ${wishlist.includes(product.id) ? "liked" : ""}"
+          onclick="toggleWishlist(${product.id})"
+          aria-label="Shto në wishlist"
+          title="Shto në wishlist"
+        >${wishlist.includes(product.id) ? "🎃" : "👻"}</button>
+      </div>
+
+      <div class="product-info">
+        <div class="product-category">${getCategoryName(product.category)}</div>
+        <h3 class="product-name">${product.name}</h3>
+
+        <div class="price-row">
+          <span class="price">${formatPrice(product.price)}</span>
+          <span class="old-price">${formatPrice(product.oldPrice)}</span>
         </div>
-    </div>
 
-    <!-- Wishlist / 10% Discount Section (Përpara Footer-it) -->
-    <div class="wishlist-discount-section">
-        <div class="wishlist-discount-container">
-            <h2>Bashkohuni me Delulu VIP 🎃</h2>
-            <p>Vendosni email-in tuaj për të shtuar produktet në Wishlist dhe për të përfituar <strong>10% ulje</strong> në porosinë tuaj të parë!</p>
-            <form class="wishlist-form" onsubmit="handleWishlistSubmit(event)">
-                <input type="email" id="wishlistEmail" placeholder="Vendosni email-in tuaj këtu..." required>
-                <button type="submit">Merr 10% Ulje</button>
-            </form>
-            <div id="wishlistSuccess" class="wishlist-success-msg" style="display: none;">
-                <i class="fa-solid fa-circle-check"></i> U regjistruat me sukses! Kodi juaj i uljes 10% është: <strong>DELULU10</strong>
-            </div>
+        <select class="size-select" id="size-${product.id}" aria-label="Zgjidh masën për ${product.name}">
+          <option value="">Zgjidh masën</option>
+          ${availableSizes.map(size => `<option value="${size}">Masa ${size}</option>`).join("")}
+        </select>
+
+        <button class="add-button" onclick="addToCart(${product.id})">
+          SHTO NË SHPORTË +
+        </button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function setCategory(category) {
+  currentCategory = category;
+
+  document.querySelectorAll(".filter-button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.category === category
+    );
+  });
+
+  renderProducts();
+
+  document.getElementById("collection").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+document.querySelectorAll(".filter-button").forEach(button => {
+  button.addEventListener("click", () => {
+    setCategory(button.dataset.category);
+  });
+});
+
+searchInput.addEventListener("input", renderProducts);
+sortSelect.addEventListener("change", renderProducts);
+
+function toggleWishlist(productId) {
+  if (wishlist.includes(productId)) {
+    wishlist = wishlist.filter(id => id !== productId);
+    showToast("Produkti u hoq nga wishlist.");
+  } else {
+    wishlist.push(productId);
+    showToast("Produkti u shtua në wishlist 🎃");
+  }
+
+  renderProducts();
+}
+
+function addToCart(productId) {
+  const product = products.find(item => item.id === productId);
+  const sizeSelect = document.getElementById(`size-${productId}`);
+  const selectedSize = sizeSelect.value;
+
+  if (!selectedSize) {
+    showToast("Të lutem zgjidh masën përpara se të vazhdosh.");
+    sizeSelect.focus();
+    return;
+  }
+
+  const existingItem = cart.find(item =>
+    item.id === productId && item.size === selectedSize
+  );
+
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      size: selectedSize,
+      quantity: 1
+    });
+  }
+
+  updateCart();
+  showToast("Produkti u shtua në shportë 🛒");
+}
+
+function updateCart() {
+  const totalQuantity = cart.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
+
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  cartCount.textContent = totalQuantity;
+  cartTotal.textContent = formatPrice(totalPrice);
+
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = `
+      <div class="empty-cart">
+        <div style="font-size:38px;margin-bottom:15px;">🛒🎃</div>
+        <h3 style="margin-bottom:8px;">Shporta është bosh</h3>
+        <p>Zbulo koleksionin dhe shto produktet e tua të preferuara.</p>
+      </div>
+    `;
+  } else {
+    cartItemsContainer.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+          onerror="this.onerror=null;this.src='https://placehold.co/200x250/14141a/a0a0ab?text=Delulu';"
+        >
+
+        <div>
+          <h4>${item.name}</h4>
+          <p>Masa: ${item.size}</p>
+          <p style="color:var(--orange);">${formatPrice(item.price)}</p>
+
+          <div class="quantity-controls">
+            <button onclick="changeQuantity(${item.id}, '${item.size}', -1)" aria-label="Pakëso sasinë">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity(${item.id}, '${item.size}', 1)" aria-label="Rrit sasinë">+</button>
+          </div>
+
+          <button class="remove-item" onclick="removeFromCart(${item.id}, '${item.size}')">
+            Hiq produktin
+          </button>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2026 All rights reserved to Delulu Boutique 🎃</p>
-            <div class="footer-socials">
-                <a href="tel:+18194867873" title="Phone"><i class="fa-solid fa-phone"></i></a>
-                <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://wa.me/18194867873" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
+        <div class="cart-item-price">
+          ${formatPrice(item.price * item.quantity)}
         </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script>
-        let cart = JSON.parse(localStorage.getItem('delulu_cart')) || [];
-        let currentProduct = {};
-        let currentBrand = localStorage.getItem('delulu_brand') || 'all';
-        let currentView = localStorage.getItem('delulu_view') || 'home';
-        
-        let discountPercent = parseFloat(localStorage.getItem('delulu_discount')) || 0;
-        let appliedCouponCode = localStorage.getItem('delulu_coupon_code') || '';
-
-        window.addEventListener('DOMContentLoaded', () => {
-            initHalloweenBats();
-            updateCartUI();
-            if (currentView === 'catalog') {
-                openCatalog(currentBrand, false);
-            } else {
-                goHome(false);
-            }
-        });
-
-        // Generimi i Lakuriqëve të Natës (Bats Animation)
-        function initHalloweenBats() {
-            const batsContainer = document.createElement('div');
-            batsContainer.id = 'batsContainer';
-            batsContainer.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;overflow:hidden;';
-            document.body.appendChild(batsContainer);
-
-            const batCount = 14;
-            for (let i = 0; i < batCount; i++) {
-                createBat(batsContainer);
-            }
-        }
-
-        function createBat(container) {
-            const bat = document.createElement('div');
-            bat.className = 'floating-bat';
-            bat.innerText = '🦇';
-            
-            const startTop = Math.random() * 85; 
-            const size = 18 + Math.random() * 26; 
-            const duration = 7 + Math.random() * 11; 
-            const delay = Math.random() * 12; 
-            const opacity = 0.35 + Math.random() * 0.55;
-
-            bat.style.cssText = `
-                position: absolute;
-                top: ${startTop}vh;
-                left: -80px;
-                font-size: ${size}px;
-                opacity: ${opacity};
-                animation: flyBatAcross ${duration}s linear ${delay}s infinite;
-                user-select: none;
-                pointer-events: none;
-                filter: drop-shadow(0 0 8px rgba(255, 117, 24, 0.7));
-            `;
-
-            container.appendChild(bat);
-        }
-
-        function toggleDrawer() {
-            document.getElementById('sideDrawer').classList.toggle('active');
-            document.getElementById('drawerOverlay').classList.toggle('active');
-        }
-
-        function toggleCart() {
-            document.getElementById('cartDrawer').classList.toggle('active');
-            document.getElementById('cartOverlay').classList.toggle('active');
-        }
-
-        function toggleSearch() {
-            const modal = document.getElementById('searchModal');
-            modal.classList.toggle('active');
-            if(modal.classList.contains('active')) {
-                document.getElementById('searchInput').focus();
-            }
-        }
-
-        function toggleFilterDrawer() {
-            document.getElementById('filterDrawer').classList.toggle('active');
-            document.getElementById('filterOverlay').classList.toggle('active');
-        }
-
-        function goHome(smooth = true) {
-            currentView = 'home';
-            localStorage.setItem('delulu_view', 'home');
-            localStorage.setItem('delulu_brand', 'all');
-
-            document.getElementById('homeView').classList.add('active');
-            document.getElementById('catalogView').classList.remove('active');
-            if(smooth) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function openCatalog(brand, smooth = true) {
-            currentBrand = brand;
-            currentView = 'catalog';
-            localStorage.setItem('delulu_view', 'catalog');
-            localStorage.setItem('delulu_brand', brand);
-
-            const catalogView = document.getElementById('catalogView');
-            const homeView = document.getElementById('homeView');
-            const catalogTitle = document.getElementById('catalogTitle');
-            const breadcrumb = document.getElementById('breadcrumbCategory');
-
-            homeView.classList.remove('active');
-            catalogView.classList.add('active');
-
-            let title = brand === 'all' ? 'All Products' : brand;
-            catalogTitle.innerText = title;
-            breadcrumb.innerText = title;
-
-            renderCatalogProducts();
-            if(smooth) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
-
-        function renderCatalogProducts() {
-            const catalogGrid = document.getElementById('catalogGrid');
-            const productCount = document.getElementById('productCount');
-            const allCards = Array.from(document.querySelectorAll('#homeSlider .product-card'));
-            
-            const sortVal = document.getElementById('sortSelect').value;
-            const minP = parseFloat(document.getElementById('minPrice').value) || 0;
-            const maxP = parseFloat(document.getElementById('maxPrice').value) || Infinity;
-
-            let filtered = allCards.filter(card => {
-                let cardBrand = card.getAttribute('data-brand');
-                let cardPrice = parseFloat(card.getAttribute('data-price'));
-
-                let matchBrand = (currentBrand === 'all' || cardBrand === currentBrand);
-                let matchPrice = (cardPrice >= minP && cardPrice <= maxP);
-                return matchBrand && matchPrice;
-            });
-
-            if (sortVal === 'low-high') {
-                filtered.sort((a, b) => parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price')));
-            } else if (sortVal === 'high-low') {
-                filtered.sort((a, b) => parseFloat(b.getAttribute('data-price')) - parseFloat(a.getAttribute('data-price')));
-            }
-
-            catalogGrid.innerHTML = '';
-            filtered.forEach(card => {
-                catalogGrid.appendChild(card.cloneNode(true));
-            });
-
-            productCount.innerText = `${filtered.length} products`;
-        }
-
-        function applyFilters() {
-            renderCatalogProducts();
-            toggleFilterDrawer();
-        }
-
-        function handleSearch(query) {
-            const resultsContainer = document.getElementById('searchResults');
-            const allCards = document.querySelectorAll('#homeSlider .product-card');
-            
-            if(!query.trim()) {
-                resultsContainer.innerHTML = '<p style="color: #888; text-align: center; margin-top: 30px; font-size: 14px;">Shkruani emrin e produktit për të kërkuar...</p>';
-                return;
-            }
-
-            let html = '';
-            allCards.forEach(card => {
-                const name = card.querySelector('.product-name').innerText;
-                const priceFull = card.querySelector('.product-price').innerText;
-                const price = priceFull.split(' ')[0] + ' ' + priceFull.split(' ')[1];
-                const img = card.querySelector('img').src;
-                const brand = card.getAttribute('data-brand');
-
-                if(name.toLowerCase().includes(query.toLowerCase()) || brand.toLowerCase().includes(query.toLowerCase())) {
-                    html += `
-                        <div class="search-result-item" onclick="toggleSearch(); openProductModal('${name}', '${price}', '${img}')">
-                            <img src="${img}" alt="${name}">
-                            <div>
-                                <h4 style="font-size: 14px; font-weight: 500;">${name}</h4>
-                                <p style="font-size: 12px; color: #ff7518;">${price}</p>
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-
-            resultsContainer.innerHTML = html || '<p style="color: #888; text-align: center; margin-top: 30px; font-size: 14px;">Nuk u gjet asnjë produkt.</p>';
-        }
-
-        function openProductModal(title, priceFull, imgSrc) {
-            const cleanPrice = priceFull.includes('ALL') ? priceFull.split('ALL')[1].trim() : priceFull;
-            const finalPriceFormatted = 'ALL ' + cleanPrice.split(' ')[0];
-
-            currentProduct = { title, price: finalPriceFormatted, imgSrc };
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalPrice').innerText = finalPriceFormatted;
-            document.getElementById('modalImg').src = imgSrc;
-            document.getElementById('qtyValue').innerText = '1';
-            document.getElementById('sizeSelect').value = '';
-            document.getElementById('productModal').classList.add('active');
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModal').classList.remove('active');
-        }
-
-        function closeModalOutside(e) {
-            if (e.target.id === 'productModal') {
-                closeProductModal();
-            }
-        }
-
-        function incrementQty() {
-            let qty = document.getElementById('qtyValue');
-            qty.innerText = parseInt(qty.innerText) + 1;
-        }
-
-        function decrementQty() {
-            let qty = document.getElementById('qtyValue');
-            let current = parseInt(qty.innerText);
-            if (current > 1) {
-                qty.innerText = current - 1;
-            }
-        }
-
-        function parsePriceValue(priceStr) {
-            if (typeof priceStr === 'number') return priceStr;
-            let cleaned = priceStr.replace(/,/g, '').replace(/[^0-9.]/g, '');
-            return parseFloat(cleaned) || 0;
-        }
-
-        function formatCurrency(amount) {
-            return 'ALL ' + amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-
-        function addToCart() {
-            let size = document.getElementById('sizeSelect').value;
-            if (!size) {
-                alert('Ju lutemi zgjidhni masën (Size) para se të vazhdoni!');
-                return;
-            }
-            let quantity = parseInt(document.getElementById('qtyValue').innerText);
-
-            cart.push({
-                title: currentProduct.title,
-                price: currentProduct.price,
-                size: size,
-                quantity: quantity
-            });
-
-            localStorage.setItem('delulu_cart', JSON.stringify(cart));
-            updateCartUI();
-            closeProductModal();
-            toggleCart();
-        }
-
-        function applyCoupon() {
-            const input = document.getElementById('couponInput');
-            const msgBox = document.getElementById('couponStatusMsg');
-            if (!input) return;
-
-            const code = input.value.trim().toUpperCase();
-
-            // Aplikohet ulja vetëm nëse vendoset saktësisht DELULU10
-            if (code === 'DELULU10') {
-                discountPercent = 0.10;
-                appliedCouponCode = 'DELULU10';
-                localStorage.setItem('delulu_discount', '0.10');
-                localStorage.setItem('delulu_coupon_code', 'DELULU10');
-                
-                msgBox.className = 'coupon-status-msg success';
-                msgBox.style.display = 'block';
-                msgBox.innerText = 'Kodi DELULU10 u aplikua me sukses! (-10%)';
-            } else {
-                // Nëse përdoruesi shkruan një kod tjetër, ulja nuk aplikohet dhe hiqet
-                discountPercent = 0;
-                appliedCouponCode = '';
-                localStorage.removeItem('delulu_discount');
-                localStorage.removeItem('delulu_coupon_code');
-
-                msgBox.className = 'coupon-status-msg error';
-                msgBox.style.display = 'block';
-                msgBox.innerText = 'Kodi i uljes nuk është i vlefshëm.';
-            }
-
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const cartBody = document.getElementById('cartBody');
-            const cartCount = document.getElementById('cartCount');
-            const cartFooter = document.getElementById('cartFooter');
-            const cartSummary = document.getElementById('cartSummary');
-            const couponInput = document.getElementById('couponInput');
-            const couponMsg = document.getElementById('couponStatusMsg');
-
-            let totalItemsCount = 0;
-            cart.forEach(item => totalItemsCount += item.quantity);
-            cartCount.innerText = totalItemsCount;
-
-            if (cart.length === 0) {
-                cartBody.innerHTML = '<p style="color: #888; font-size: 13px; text-align: center; margin-top: 40px;">Shporta është boshe.</p>';
-                cartFooter.style.display = 'none';
-                return;
-            }
-
-            let html = '';
-            let subtotal = 0;
-
-            cart.forEach((item, index) => {
-                let itemPriceNum = parsePriceValue(item.price);
-                let itemTotal = itemPriceNum * item.quantity;
-                subtotal += itemTotal;
-
-                html += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <h4>${item.title}</h4>
-                            <p>Masa: ${item.size} | Sasia: ${item.quantity}</p>
-                            <p style="color: var(--accent-orange);">${item.price}</p>
-                        </div>
-                        <i class="fa-solid fa-trash" style="cursor: pointer; color: #71717a; font-size: 14px;" onclick="removeFromCart(${index})"></i>
-                    </div>
-                `;
-            });
-
-            cartBody.innerHTML = html;
-            cartFooter.style.display = 'block';
-
-            // Transporti: 200 ALL për 1 produkt total, FALAS për 2 ose më shumë produkte
-            let shippingFee = (totalItemsCount === 1) ? 200 : 0;
-            let discountAmount = subtotal * discountPercent;
-            let grandTotal = subtotal - discountAmount + shippingFee;
-
-            // Përditësimi i pamjes së statusit të kodit
-            if (appliedCouponCode === 'DELULU10') {
-                if (couponInput && !couponInput.value) couponInput.value = 'DELULU10';
-                if (couponMsg) {
-                    couponMsg.className = 'coupon-status-msg success';
-                    couponMsg.style.display = 'block';
-                    couponMsg.innerText = 'Kodi DELULU10 është aktiv (-10%).';
-                }
-            } else {
-                if (couponMsg && couponMsg.className !== 'coupon-status-msg error') {
-                    couponMsg.style.display = 'none';
-                }
-            }
-
-            // Përmbledhja vizuale në Cart
-            let summaryHtml = `
-                <div class="cart-summary-row">
-                    <span>Nëntotali:</span>
-                    <span>${formatCurrency(subtotal)}</span>
-                </div>
-            `;
-
-            if (discountAmount > 0) {
-                summaryHtml += `
-                    <div class="cart-summary-row discount-row">
-                        <span>Ulja (DELULU10 -10%):</span>
-                        <span>-${formatCurrency(discountAmount)}</span>
-                    </div>
-                `;
-            }
-
-            if (totalItemsCount === 1) {
-                summaryHtml += `
-                    <div class="cart-summary-row">
-                        <span>Transporti (1 produkt):</span>
-                        <span>${formatCurrency(shippingFee)}</span>
-                    </div>
-                `;
-            } else {
-                summaryHtml += `
-                    <div class="cart-summary-row" style="color: #4ade80;">
-                        <span>Transporti (2+ produkte):</span>
-                        <span>FALAS</span>
-                    </div>
-                `;
-            }
-
-            summaryHtml += `
-                <div class="cart-summary-row total-row">
-                    <span>TOTALI:</span>
-                    <span>${formatCurrency(grandTotal)}</span>
-                </div>
-            `;
-
-            cartSummary.innerHTML = summaryHtml;
-
-            // Ndërtimi i mesazhit të WhatsApp
-            let whatsappText = "Përshëndetje, dëshiroj të bëj këtë porosi nga Delulu Boutique:\n\n";
-
-            cart.forEach((item) => {
-                whatsappText += `- ${item.title} (Masa: ${item.size}, Sasia: ${item.quantity}) - ${item.price}\n`;
-            });
-
-            whatsappText += `\n------------------------------\n`;
-            whatsappText += `Nëntotali: ${formatCurrency(subtotal)}\n`;
-            
-            if (discountAmount > 0) {
-                whatsappText += `Ulja (DELULU10 -10%): -${formatCurrency(discountAmount)}\n`;
-            }
-
-            if (totalItemsCount === 1) {
-                whatsappText += `Transporti (1 produkt): ${formatCurrency(shippingFee)}\n`;
-            } else {
-                whatsappText += `Transporti (2+ produkte): FALAS\n`;
-            }
-
-            whatsappText += `------------------------------\n`;
-            whatsappText += `TOTALI PËRFUNDIMTAR: ${formatCurrency(grandTotal)}`;
-
-            let encodedMessage = encodeURIComponent(whatsappText);
-            document.getElementById('whatsappBtn').href = `https://wa.me/18194867873?text=${encodedMessage}`;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            localStorage.setItem('delulu_cart', JSON.stringify(cart));
-            updateCartUI();
-        }
-
-        function handleWishlistSubmit(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('wishlistEmail');
-            if (emailInput && emailInput.value) {
-                document.getElementById('wishlistSuccess').style.display = 'inline-block';
-                emailInput.value = '';
-            }
-        }
-    </script>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("checkoutButton").disabled = cart.length === 0;
+  document.getElementById("checkoutButton").style.opacity =
+    cart.length === 0 ? "0.5" : "1";
+}
+
+function changeQuantity(productId, size, change) {
+  const item = cart.find(item =>
+    item.id === productId && item.size === size
+  );
+
+  if (!item) return;
+
+  item.quantity += change;
+
+  if (item.quantity <= 0) {
+    cart = cart.filter(item =>
+      !(item.id === productId && item.size === size)
+    );
+  }
+
+  updateCart();
+}
+
+function removeFromCart(productId, size) {
+  cart = cart.filter(item =>
+    !(item.id === productId && item.size === size)
+  );
+
+  updateCart();
+  showToast("Produkti u hoq nga shporta.");
+}
+
+function openCart() {
+  cartDrawer.classList.add("open");
+  cartOverlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeCart() {
+  cartDrawer.classList.remove("open");
+  cartOverlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("cartButton").addEventListener("click", openCart);
+document.getElementById("closeCart").addEventListener("click", closeCart);
+cartOverlay.addEventListener("click", closeCart);
+
+document.getElementById("checkoutButton").addEventListener("click", () => {
+  if (cart.length === 0) {
+    showToast("Shporta është bosh.");
+    return;
+  }
+
+  checkoutModal.classList.add("open");
+});
+
+document.getElementById("closeCheckout").addEventListener("click", () => {
+  checkoutModal.classList.remove("open");
+});
+
+checkoutModal.addEventListener("click", event => {
+  if (event.target === checkoutModal) {
+    checkoutModal.classList.remove("open");
+  }
+});
+
+document.getElementById("checkoutForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (cart.length === 0) {
+    showToast("Shporta është bosh.");
+    checkoutModal.classList.remove("open");
+    return;
+  }
+
+  const name = document.getElementById("customerName").value.trim();
+  const phone = document.getElementById("customerPhone").value.trim();
+  const address = document.getElementById("customerAddress").value.trim();
+  const notes = document.getElementById("customerNotes").value.trim();
+
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  let message = "Përshëndetje Delulu Boutique! Dua të bëj këtë porosi:\n\n";
+
+  message += "EMRI: " + name + "\n";
+  message += "TELEFONI: " + phone + "\n";
+  message += "ADRESA: " + address + "\n\n";
+
+  message += "PRODUKTET:\n";
+
+  cart.forEach((item, index) => {
+    message += `${index + 1}. ${item.name} | Masa ${item.size} | Sasia: ${item.quantity} | ${formatPrice(item.price * item.quantity)}\n`;
+  });
+
+  message += "\nTOTALI I PRODUKTEVE: " + formatPrice(totalPrice) + "\n";
+  message += "Transporti: Ju lutem konfirmoni koston e transportit.\n";
+
+  if (notes) {
+    message += "\nSHËNIME: " + notes + "\n";
+  }
+
+  message += "\nFaleminderit!";
+
+  const whatsappNumber = "18194867799";
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
+
+  window.open(whatsappURL, "_blank");
+
+  checkoutModal.classList.remove("open");
+});
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimeout);
+
+  window.toastTimeout = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2600);
+}
+
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("navLinks").classList.toggle("open");
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("navLinks").classList.remove("open");
+  });
+});
+
+document.getElementById("wishlistForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const emailInput = document.getElementById("wishlistEmail");
+  const message = document.getElementById("wishlistMessage");
+
+  if (!emailInput.checkValidity()) {
+    emailInput.reportValidity();
+    return;
+  }
+
+  message.textContent =
+    "Faleminderit! U regjistruat me sukses ne Delulu Boutique 🎃.";
+
+  emailInput.value = "";
+});
+
+document.getElementById("currentYear").textContent =
+  new Date().getFullYear();
+
+// Init
+initHalloweenBats();
+renderProducts();
+updateCart();
+</script>
 </body>
 </html>
