@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Delulu Boutique | Halloween Edition 🎃</title>
-<meta name="description" content="Zbulo koleksionin e frikshëm të atleteve dhe UGG nga Delulu Boutique. Zgjidh modelin tënd të preferuar dhe porosit online.">
+<title>Delulu Boutique | Black Friday Edition ⚡</title>
+<meta name="description" content="Zbulo koleksionin e veçantë të Black Friday me atletet dhe UGG më të kërkuara nga Delulu Boutique. Përdor kodin DELULU10 për 10% ulje shtesë.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,17 +13,16 @@
 
 <style>
 :root {
-  --orange: #ff7518;
-  --orange-dark: #e05d00;
-  --purple: #9d4edd;
-  --bg-dark: #0a0a0d;
-  --bg-card: #14141a;
-  --bg-input: #0f0f14;
+  --accent: #ffe600;
+  --accent-dark: #cca300;
+  --red: #ff2e63;
+  --bg-dark: #08080a;
+  --bg-card: #121217;
+  --bg-input: #0c0c10;
   --text-main: #f4f4f6;
   --text-muted: #a0a0ab;
-  --border: #262633;
-  --sale: #ff7518;
-  --glow: rgba(255, 117, 24, 0.35);
+  --border: #242433;
+  --glow: rgba(255, 230, 0, 0.3);
 }
 
 * {
@@ -64,24 +63,32 @@ img {
   display: block;
 }
 
-/* Halloween Announcement */
+/* Black Friday Announcement */
 .announcement {
-  background: linear-gradient(90deg, #180a22, var(--orange-dark), #180a22);
+  background: linear-gradient(90deg, #000000, #ff0055, #ffe600, #000000);
+  background-size: 300% 100%;
+  animation: bfGradient 6s ease infinite;
   color: #ffffff;
   text-align: center;
-  padding: 10px 15px;
+  padding: 11px 15px;
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.8px;
+  font-weight: 800;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  box-shadow: 0 2px 12px var(--glow);
+  box-shadow: 0 2px 15px rgba(255, 0, 85, 0.4);
+}
+
+@keyframes bfGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10, 10, 13, 0.95);
+  background: rgba(8, 8, 10, 0.95);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
 }
@@ -103,11 +110,11 @@ header {
   letter-spacing: 1px;
   white-space: nowrap;
   color: var(--text-main);
-  text-shadow: 0 0 10px var(--glow);
+  text-shadow: 0 0 12px var(--glow);
 }
 
 .logo span {
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .nav-links {
@@ -124,7 +131,7 @@ header {
 }
 
 .nav-links a:hover {
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .nav-actions {
@@ -149,17 +156,17 @@ header {
 }
 
 .icon-button:hover {
-  border-color: var(--orange);
-  box-shadow: 0 0 10px var(--glow);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--glow);
 }
 
 .cart-count {
   position: absolute;
   top: -4px;
   right: -4px;
-  background: var(--orange);
+  background: var(--accent);
   color: #000;
-  font-weight: 700;
+  font-weight: 800;
   border-radius: 50%;
   width: 19px;
   height: 19px;
@@ -180,7 +187,7 @@ header {
   align-items: center;
   position: relative;
   background:
-    linear-gradient(90deg, rgba(10, 10, 13, 0.98) 0%, rgba(10, 10, 13, 0.82) 50%, rgba(10, 10, 13, 0.3) 100%),
+    linear-gradient(90deg, rgba(8, 8, 10, 0.98) 0%, rgba(8, 8, 10, 0.85) 50%, rgba(8, 8, 10, 0.4) 100%),
     url("Images1/ugglow1.jpeg") center 45% / cover no-repeat;
 }
 
@@ -194,8 +201,8 @@ header {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 11px;
-  font-weight: 700;
-  color: var(--orange);
+  font-weight: 800;
+  color: var(--accent);
   margin-bottom: 18px;
 }
 
@@ -208,8 +215,8 @@ header {
 }
 
 .hero h1 span {
-  color: var(--orange);
-  text-shadow: 0 0 15px rgba(255, 117, 24, 0.4);
+  color: var(--accent);
+  text-shadow: 0 0 18px rgba(255, 230, 0, 0.4);
 }
 
 .hero p {
@@ -227,32 +234,33 @@ header {
   gap: 9px;
   padding: 14px 24px;
   border: none;
-  background: var(--orange);
+  background: var(--accent);
   color: #000;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 12px;
   letter-spacing: 0.8px;
   border-radius: 4px;
   transition: 0.2s;
-  box-shadow: 0 0 15px var(--glow);
+  box-shadow: 0 0 18px var(--glow);
 }
 
 .button:hover {
   background: #ffffff;
   color: #000;
   transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.6);
 }
 
 .button-light {
   background: var(--bg-card);
   color: var(--text-main);
   border: 1px solid var(--border);
+  font-weight: 700;
 }
 
 .button-light:hover {
-  border-color: var(--orange);
-  color: var(--orange);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .benefits {
@@ -279,7 +287,7 @@ header {
   display: block;
   font-size: 21px;
   margin-bottom: 7px;
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .section {
@@ -336,13 +344,13 @@ header {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(10, 10, 13, 0.9), transparent 75%);
+  background: linear-gradient(0deg, rgba(8, 8, 10, 0.9), transparent 75%);
   z-index: -1;
   transition: 0.3s;
 }
 
 .category-card:hover::before {
-  background: linear-gradient(0deg, rgba(10, 10, 13, 0.95), rgba(10, 10, 13, 0.2));
+  background: linear-gradient(0deg, rgba(8, 8, 10, 0.95), rgba(8, 8, 10, 0.3));
 }
 
 .category-card h3 {
@@ -359,7 +367,7 @@ header {
 }
 
 .category-card .button {
-  background: var(--orange);
+  background: var(--accent);
   color: #000;
 }
 
@@ -413,7 +421,7 @@ header {
 
 .search-input:focus,
 .sort-select:focus {
-  border-color: var(--orange);
+  border-color: var(--accent);
   box-shadow: 0 0 8px var(--glow);
 }
 
@@ -431,17 +439,17 @@ header {
   color: var(--text-main);
   padding: 11px 22px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 4px;
   transition: 0.2s;
 }
 
 .filter-button.active,
 .filter-button:hover {
-  background: var(--orange);
+  background: var(--accent);
   color: #000;
-  border-color: var(--orange);
-  box-shadow: 0 0 10px var(--glow);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--glow);
 }
 
 .product-grid {
@@ -461,14 +469,14 @@ header {
 }
 
 .product-card:hover {
-  border-color: var(--orange);
-  box-shadow: 0 0 15px var(--glow);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px var(--glow);
 }
 
 .product-image-wrap {
   position: relative;
   overflow: hidden;
-  background: #0f0f14;
+  background: #0c0c10;
   aspect-ratio: 3 / 4;
 }
 
@@ -487,14 +495,15 @@ header {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: var(--orange);
-  color: #000;
+  background: var(--red);
+  color: #fff;
   padding: 6px 9px;
   font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
   border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(255, 46, 99, 0.4);
 }
 
 .wishlist-button {
@@ -503,17 +512,17 @@ header {
   top: 12px;
   width: 34px;
   height: 34px;
-  background: rgba(10, 10, 13, 0.8);
+  background: rgba(8, 8, 10, 0.85);
   border: 1px solid var(--border);
   color: var(--text-main);
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 16px;
   transition: 0.2s;
 }
 
 .wishlist-button.liked {
-  color: var(--orange);
-  border-color: var(--orange);
+  color: var(--red);
+  border-color: var(--red);
 }
 
 .product-info {
@@ -547,8 +556,8 @@ header {
 
 .price {
   font-size: 15px;
-  font-weight: 700;
-  color: var(--orange);
+  font-weight: 800;
+  color: var(--accent);
 }
 
 .old-price {
@@ -572,11 +581,11 @@ header {
 .add-button {
   width: 100%;
   padding: 12px 8px;
-  border: 1px solid var(--orange);
-  background: var(--orange);
+  border: 1px solid var(--accent);
+  background: var(--accent);
   color: #000;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.5px;
   border-radius: 4px;
   transition: 0.2s;
@@ -619,7 +628,7 @@ header {
 }
 
 .stars {
-  color: var(--orange);
+  color: var(--accent);
   letter-spacing: 3px;
   font-size: 14px;
   margin-bottom: 16px;
@@ -655,6 +664,7 @@ header {
   border-radius: 8px;
   padding: 40px;
   text-align: center;
+  position: relative;
 }
 
 .wishlist-box h2 {
@@ -688,13 +698,27 @@ header {
 }
 
 .form-message {
-  margin-top: 14px;
-  font-size: 12px;
-  color: var(--purple);
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--accent);
+  line-height: 1.6;
+}
+
+.promo-code-badge {
+  display: inline-block;
+  background: rgba(255, 230, 0, 0.15);
+  border: 1px dashed var(--accent);
+  color: var(--accent);
+  padding: 6px 14px;
+  font-weight: 800;
+  font-size: 15px;
+  border-radius: 4px;
+  margin-top: 8px;
+  letter-spacing: 1px;
 }
 
 footer {
-  background: #060608;
+  background: #040405;
   color: var(--text-main);
   padding: 55px 5% 22px;
   border-top: 1px solid var(--border);
@@ -716,7 +740,7 @@ footer {
 }
 
 .footer-logo span {
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .footer-description {
@@ -730,7 +754,7 @@ footer {
   font-size: 12px;
   letter-spacing: 1px;
   margin-bottom: 18px;
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .footer-column a {
@@ -756,7 +780,7 @@ footer {
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(4px);
   z-index: 200;
   opacity: 0;
@@ -799,7 +823,7 @@ footer {
 .cart-header h2 {
   font-family: "Playfair Display", serif;
   font-size: 25px;
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .close-button {
@@ -839,7 +863,7 @@ footer {
   width: 80px;
   height: 95px;
   object-fit: cover;
-  background: #0f0f14;
+  background: #0c0c10;
   border-radius: 4px;
 }
 
@@ -858,9 +882,9 @@ footer {
 
 .cart-item-price {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 800;
   white-space: nowrap;
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .quantity-controls {
@@ -885,7 +909,7 @@ footer {
 .remove-item {
   border: none;
   background: transparent;
-  color: #f87171;
+  color: var(--red);
   font-size: 11px;
   margin-top: 9px;
 }
@@ -893,16 +917,16 @@ footer {
 .cart-footer {
   border-top: 1px solid var(--border);
   padding: 20px;
-  background: #0d0d12;
+  background: #0a0a0d;
 }
 
 .cart-total {
   display: flex;
   justify-content: space-between;
-  font-weight: 700;
+  font-weight: 800;
   margin-bottom: 17px;
   font-size: 15px;
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .cart-note {
@@ -925,7 +949,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
@@ -952,7 +976,7 @@ footer {
   font-family: "Playfair Display", serif;
   font-size: 28px;
   margin-bottom: 8px;
-  color: var(--orange);
+  color: var(--accent);
 }
 
 .modal-content > p {
@@ -993,7 +1017,42 @@ footer {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: var(--orange);
+  border-color: var(--accent);
+}
+
+.checkout-summary-box {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px;
+  margin: 18px 0;
+}
+
+.checkout-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.checkout-summary-row.discount-row {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.checkout-summary-row.total-row {
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.checkout-summary-row.total-row span:last-child {
+  color: var(--accent);
 }
 
 .checkout-submit {
@@ -1007,9 +1066,9 @@ footer {
   bottom: 25px;
   left: 50%;
   transform: translate(-50%, 20px);
-  background: var(--orange);
+  background: var(--accent);
   color: #000;
-  font-weight: 700;
+  font-weight: 800;
   padding: 14px 22px;
   font-size: 12px;
   border-radius: 4px;
@@ -1019,35 +1078,13 @@ footer {
   text-align: center;
   width: max-content;
   max-width: 90%;
-  box-shadow: 0 0 15px var(--glow);
+  box-shadow: 0 0 18px var(--glow);
 }
 
 .toast.show {
   opacity: 1;
   visibility: visible;
   transform: translate(-50%, 0);
-}
-
-/* Flying Bats Animation */
-@keyframes flyBatAcross {
-  0% {
-    transform: translateX(-80px) translateY(0px) rotate(0deg) scale(0.9);
-  }
-  20% {
-    transform: translateX(25vw) translateY(-35px) rotate(12deg) scale(1.1);
-  }
-  40% {
-    transform: translateX(50vw) translateY(20px) rotate(-10deg) scale(0.95);
-  }
-  60% {
-    transform: translateX(75vw) translateY(-25px) rotate(15deg) scale(1.05);
-  }
-  80% {
-    transform: translateX(90vw) translateY(10px) rotate(-8deg) scale(1);
-  }
-  100% {
-    transform: translateX(105vw) translateY(0px) rotate(0deg) scale(0.9);
-  }
 }
 
 @media (max-width: 1000px) {
@@ -1206,7 +1243,7 @@ footer {
     right: 8px;
     width: 30px;
     height: 30px;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .add-button {
@@ -1263,7 +1300,7 @@ footer {
 <body>
 
 <div class="announcement">
-  🎃 HALLOWEEN SPECIAL SALE · DELULU BOUTIQUE · YOUR STYLE, YOUR RULES 🦇
+  ⚡ BLACK FRIDAY SALE · DELULU BOUTIQUE · PËRDOR KODIN 'DELULU10' PËR 10% ULJE SHTESË ⚡
 </div>
 
 <header>
@@ -1292,13 +1329,13 @@ footer {
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="hero-content">
-      <div class="eyebrow">🎃 Your next favorite pair</div>
+      <div class="eyebrow">⚡ BLACK FRIDAY SPECIAL DEALS</div>
 
-      <h1>Dress like<br>you're in your<br><span>delulu era.</span> 🦇</h1>
+      <h1>Dress like<br>you're in your<br><span>delulu era.</span> ⚡</h1>
 
       <p>
-        Modele që të bëjnë të ndihesh ndryshe. Zbulo koleksionin
-        tonë të atleteve dhe UGG për çdo ditë, çdo stil dhe çdo mood.
+        Modele ekskluzive me çmimet më të ulëta të vitit. Zbulo koleksionin
+        tonë të atleteve dhe UGG dhe përfitoni 10% ulje shtesë.
       </p>
 
       <a href="#collection" class="button">ZBULO KOLEKSIONIN ↗</a>
@@ -1308,18 +1345,18 @@ footer {
   <!-- BENEFITS -->
   <section class="benefits">
     <div class="benefit">
-      <span>🎃</span>
-      Modele për çdo stil
+      <span>⚡</span>
+      Ulje Ekskluzive Black Friday
     </div>
 
     <div class="benefit">
-      <span>👻</span>
-      Porosi të thjeshta
+      <span>🚚</span>
+      Dërgesa në gjithë Shqipërinë
     </div>
 
     <div class="benefit">
-      <span>🦇</span>
-      Na kontakto në WhatsApp
+      <span>💬</span>
+      Porosit direkt në WhatsApp
     </div>
   </section>
 
@@ -1327,8 +1364,8 @@ footer {
   <section class="section" id="categories">
     <div class="section-heading">
       <div class="eyebrow">Find your vibe</div>
-      <h2>Shop by category 🕸️</h2>
-      <p>Zgjidh stilin që të përfaqëson.</p>
+      <h2>Shop by category ⚡</h2>
+      <p>Zgjidh stilin që të përfaqëson me çmimet me ulje.</p>
     </div>
 
     <div class="category-cards">
@@ -1353,8 +1390,8 @@ footer {
     <div class="section">
       <div class="collection-top">
         <div>
-          <h2>Halloween Collection 🎃</h2>
-          <p>Gjej palën tënde të preferuar.</p>
+          <h2>Black Friday Collection ⚡</h2>
+          <p>Gjej palën tënde të preferuar me ulje super speciale.</p>
         </div>
 
         <div class="search-sort">
@@ -1379,7 +1416,7 @@ footer {
         <button class="filter-button active" data-category="all">Të gjitha</button>
         <button class="filter-button" data-category="uggs">UGG</button>
         <button class="filter-button" data-category="sneakers">Sneakers</button>
-        <button class="filter-button" data-category="wishlist">🎃 Wishlist</button>
+        <button class="filter-button" data-category="wishlist">❤️ Wishlist</button>
       </div>
 
       <div class="product-grid" id="productGrid"></div>
@@ -1391,7 +1428,7 @@ footer {
     <div class="section">
       <div class="section-heading">
         <div class="eyebrow">Love from our community</div>
-        <h2>Delulu girls say it best 👻</h2>
+        <h2>Delulu girls say it best ⚡</h2>
         <p>Një hap më afër stilit tënd të preferuar.</p>
       </div>
 
@@ -1433,13 +1470,12 @@ footer {
   <section class="wishlist-section" id="wishlist">
     <div class="section">
       <div class="wishlist-box">
-        <div class="eyebrow">Stay in your delulu era</div>
-        <h2>Your wishlist starts here 🎃</h2>
+        <div class="eyebrow">Black Friday Offer</div>
+        <h2>Merr 10% Ulje Shtesë ⚡</h2>
 
         <p>
-          Regjistro email-in tënd për të shprehur interesin
-          për modelet e preferuara dhe për të marrë përditësime
-          nga Delulu Boutique.
+          Regjistro email-in tënd për të marrë kodin e uljes 10%
+          që mund ta përdorësh menjëherë gjatë Checkout-it!
         </p>
 
         <form class="wishlist-form" id="wishlistForm">
@@ -1449,7 +1485,7 @@ footer {
             placeholder="Shkruaj email-in tënd"
             required
           >
-          <button class="button" type="submit">REGJISTROHU ↗</button>
+          <button class="button" type="submit">MERR KODIN ↗</button>
         </form>
 
         <div class="form-message" id="wishlistMessage"></div>
@@ -1482,14 +1518,14 @@ footer {
       <a href="https://www.instagram.com/delulu_boutique_al/" target="_blank" rel="noopener">
         Instagram
       </a>
-      <a href="https://wa.me/18194867799" target="_blank" rel="noopener">
-        WhatsApp: +1 (819) 486-7799
+      <a href="https://wa.me/18194867873" target="_blank" rel="noopener">
+        WhatsApp: +1 (819) 486-7873
       </a>
     </div>
   </div>
 
   <div class="copyright">
-    © <span id="currentYear"></span> Delulu Boutique. All rights reserved. 🎃
+    © <span id="currentYear"></span> Delulu Boutique. All rights reserved. ⚡
   </div>
 </footer>
 
@@ -1499,7 +1535,7 @@ footer {
 <!-- CART DRAWER -->
 <aside class="cart-drawer" id="cartDrawer" aria-label="Shporta">
   <div class="cart-header">
-    <h2>Shporta ime 🛒🎃</h2>
+    <h2>Shporta ime 🛒⚡</h2>
     <button class="close-button" id="closeCart" aria-label="Mbyll shportën">×</button>
   </div>
 
@@ -1526,9 +1562,9 @@ footer {
   <div class="modal-content">
     <button class="close-button" id="closeCheckout" aria-label="Mbyll" style="position:absolute;right:20px;top:20px;">×</button>
 
-    <h2>Përfundo porosinë 🎃</h2>
+    <h2>Përfundo porosinë ⚡</h2>
     <p>
-      Plotëso të dhënat dhe vazhdo në WhatsApp për të dërguar porosinë.
+      Plotëso të dhënat dhe vendos kodin e uljes për të dërguar porosinë në WhatsApp.
     </p>
 
     <form id="checkoutForm">
@@ -1545,6 +1581,31 @@ footer {
       <div class="form-group">
         <label for="customerAddress">Adresa e dërgesës</label>
         <textarea id="customerAddress" required placeholder="Qyteti, rruga dhe adresa"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="promoCode">Kodi i Zbritjes (Opsionale)</label>
+        <div style="display:flex; gap:8px;">
+          <input id="promoCode" type="text" placeholder="p.sh. DELULU10" style="text-transform:uppercase;">
+          <button type="button" class="button-light" id="applyPromoBtn" style="padding:0 16px; white-space:nowrap;">APLIKO</button>
+        </div>
+        <div id="promoFeedback" style="font-size:12px; margin-top:6px; font-weight:600;"></div>
+      </div>
+
+      <!-- Live Price Summary Box -->
+      <div class="checkout-summary-box">
+        <div class="checkout-summary-row">
+          <span>Nëntotali:</span>
+          <span id="summarySubtotal">0 Lekë</span>
+        </div>
+        <div class="checkout-summary-row discount-row" id="summaryDiscountRow" style="display:none;">
+          <span>Ulja (10% - <span id="summaryCodeLabel"></span>):</span>
+          <span id="summaryDiscount">-0 Lekë</span>
+        </div>
+        <div class="checkout-summary-row total-row">
+          <span>Totali përfundimtar:</span>
+          <span id="summaryFinalTotal">0 Lekë</span>
+        </div>
       </div>
 
       <div class="form-group">
@@ -1570,7 +1631,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/ugglow1.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 2,
@@ -1579,7 +1640,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/ugglow2.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 3,
@@ -1588,7 +1649,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/ugglow3.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 4,
@@ -1597,7 +1658,7 @@ const products = [
     price: 3900,
     oldPrice: 9000,
     image: "Images1/dunk2.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 5,
@@ -1606,7 +1667,7 @@ const products = [
     price: 4900,
     oldPrice: 9000,
     image: "Images1/adidas2.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 6,
@@ -1615,7 +1676,7 @@ const products = [
     price: 3900,
     oldPrice: 9000,
     image: "Images1/Jordan2.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 7,
@@ -1624,7 +1685,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg3.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 8,
@@ -1633,7 +1694,7 @@ const products = [
     price: 4500,
     oldPrice: 13000,
     image: "Images1/newbalance2.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 9,
@@ -1642,7 +1703,7 @@ const products = [
     price: 2900,
     oldPrice: 6500,
     image: "Images1/nikeaf1.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 10,
@@ -1651,7 +1712,7 @@ const products = [
     price: 4900,
     oldPrice: 9000,
     image: "Images1/adidas1.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 11,
@@ -1660,7 +1721,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/uggll1.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 12,
@@ -1669,7 +1730,7 @@ const products = [
     price: 3900,
     oldPrice: 9000,
     image: "Images1/dunk1.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 13,
@@ -1678,7 +1739,7 @@ const products = [
     price: 3900,
     oldPrice: 9000,
     image: "Images1/Jordan1.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 14,
@@ -1687,7 +1748,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg1.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 15,
@@ -1696,7 +1757,7 @@ const products = [
     price: 4900,
     oldPrice: 9000,
     image: "Images1/adidas3.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 16,
@@ -1705,7 +1766,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/uggll2.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 17,
@@ -1714,7 +1775,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg2.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 18,
@@ -1723,7 +1784,7 @@ const products = [
     price: 3900,
     oldPrice: 9000,
     image: "Images1/dunk3.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   },
   {
     id: 19,
@@ -1732,7 +1793,7 @@ const products = [
     price: 3000,
     oldPrice: 6500,
     image: "Images1/ugg4.jpeg",
-    badge: "Sale 🎃"
+    badge: "BLACK FRIDAY ⚡"
   }
 ];
 
@@ -1741,6 +1802,10 @@ const availableSizes = [36, 37, 38, 39, 40, 41];
 let currentCategory = "all";
 let cart = [];
 let wishlist = [];
+
+// Promo code state
+let appliedDiscountRate = 0; // 0.10 when DELULU10 is applied
+let appliedPromoCode = "";
 
 const productGrid = document.getElementById("productGrid");
 const searchInput = document.getElementById("searchInput");
@@ -1753,45 +1818,6 @@ const cartCount = document.getElementById("cartCount");
 const cartTotal = document.getElementById("cartTotal");
 
 const checkoutModal = document.getElementById("checkoutModal");
-
-// Generate Flying Bats
-function initHalloweenBats() {
-  const batsContainer = document.createElement("div");
-  batsContainer.id = "batsContainer";
-  batsContainer.style.cssText = "position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;overflow:hidden;";
-  document.body.appendChild(batsContainer);
-
-  const batCount = 14;
-  for (let i = 0; i < batCount; i++) {
-    createBat(batsContainer);
-  }
-}
-
-function createBat(container) {
-  const bat = document.createElement("div");
-  bat.className = "floating-bat";
-  bat.innerText = "🦇";
-  
-  const startTop = Math.random() * 85;
-  const size = 18 + Math.random() * 26;
-  const duration = 7 + Math.random() * 11;
-  const delay = Math.random() * 12;
-  const opacity = 0.35 + Math.random() * 0.55;
-
-  bat.style.cssText = `
-    position: absolute;
-    top: ${startTop}vh;
-    left: -80px;
-    font-size: ${size}px;
-    opacity: ${opacity};
-    animation: flyBatAcross ${duration}s linear ${delay}s infinite;
-    user-select: none;
-    pointer-events: none;
-    filter: drop-shadow(0 0 8px rgba(255, 117, 24, 0.7));
-  `;
-
-  container.appendChild(bat);
-}
 
 function formatPrice(price) {
   return price.toLocaleString("sq-AL") + " Lekë";
@@ -1837,7 +1863,7 @@ function renderProducts() {
   if (filteredProducts.length === 0) {
     productGrid.innerHTML = `
       <div class="empty-results">
-        <h3 style="margin-bottom:10px;">Nuk u gjet asnjë produkt 🎃</h3>
+        <h3 style="margin-bottom:10px;">Nuk u gjet asnjë produkt ⚡</h3>
         <p>Provo një kërkim tjetër ose zgjidh një kategori tjetër.</p>
       </div>
     `;
@@ -1852,7 +1878,7 @@ function renderProducts() {
           alt="${product.name}"
           class="product-image"
           loading="lazy"
-          onerror="this.onerror=null;this.src='https://placehold.co/600x800/14141a/a0a0ab?text=Delulu+Boutique';"
+          onerror="this.onerror=null;this.src='https://placehold.co/600x800/121217/a0a0ab?text=Delulu+Boutique';"
         >
 
         ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ""}
@@ -1862,7 +1888,7 @@ function renderProducts() {
           onclick="toggleWishlist(${product.id})"
           aria-label="Shto në wishlist"
           title="Shto në wishlist"
-        >${wishlist.includes(product.id) ? "🎃" : "👻"}</button>
+        >${wishlist.includes(product.id) ? "❤️" : "🤍"}</button>
       </div>
 
       <div class="product-info">
@@ -1919,7 +1945,7 @@ function toggleWishlist(productId) {
     showToast("Produkti u hoq nga wishlist.");
   } else {
     wishlist.push(productId);
-    showToast("Produkti u shtua në wishlist 🎃");
+    showToast("Produkti u shtua në wishlist ❤️");
   }
 
   renderProducts();
@@ -1963,18 +1989,18 @@ function updateCart() {
     0
   );
 
-  const totalPrice = cart.reduce(
+  const subtotalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
   cartCount.textContent = totalQuantity;
-  cartTotal.textContent = formatPrice(totalPrice);
+  cartTotal.textContent = formatPrice(subtotalPrice);
 
   if (cart.length === 0) {
     cartItemsContainer.innerHTML = `
       <div class="empty-cart">
-        <div style="font-size:38px;margin-bottom:15px;">🛒🎃</div>
+        <div style="font-size:38px;margin-bottom:15px;">🛒⚡</div>
         <h3 style="margin-bottom:8px;">Shporta është bosh</h3>
         <p>Zbulo koleksionin dhe shto produktet e tua të preferuara.</p>
       </div>
@@ -1985,13 +2011,13 @@ function updateCart() {
         <img
           src="${item.image}"
           alt="${item.name}"
-          onerror="this.onerror=null;this.src='https://placehold.co/200x250/14141a/a0a0ab?text=Delulu';"
+          onerror="this.onerror=null;this.src='https://placehold.co/200x250/121217/a0a0ab?text=Delulu';"
         >
 
         <div>
           <h4>${item.name}</h4>
           <p>Masa: ${item.size}</p>
-          <p style="color:var(--orange);">${formatPrice(item.price)}</p>
+          <p style="color:var(--accent);">${formatPrice(item.price)}</p>
 
           <div class="quantity-controls">
             <button onclick="changeQuantity(${item.id}, '${item.size}', -1)" aria-label="Pakëso sasinë">−</button>
@@ -2014,6 +2040,27 @@ function updateCart() {
   document.getElementById("checkoutButton").disabled = cart.length === 0;
   document.getElementById("checkoutButton").style.opacity =
     cart.length === 0 ? "0.5" : "1";
+
+  updateCheckoutSummary();
+}
+
+function updateCheckoutSummary() {
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const discountVal = appliedDiscountRate > 0 ? Math.round(subtotal * appliedDiscountRate) : 0;
+  const finalTotal = subtotal - discountVal;
+
+  document.getElementById("summarySubtotal").textContent = formatPrice(subtotal);
+  
+  const discountRow = document.getElementById("summaryDiscountRow");
+  if (appliedDiscountRate > 0) {
+    discountRow.style.display = "flex";
+    document.getElementById("summaryCodeLabel").textContent = appliedPromoCode;
+    document.getElementById("summaryDiscount").textContent = "-" + formatPrice(discountVal);
+  } else {
+    discountRow.style.display = "none";
+  }
+
+  document.getElementById("summaryFinalTotal").textContent = formatPrice(finalTotal);
 }
 
 function changeQuantity(productId, size, change) {
@@ -2064,7 +2111,7 @@ document.getElementById("checkoutButton").addEventListener("click", () => {
     showToast("Shporta është bosh.");
     return;
   }
-
+  updateCheckoutSummary();
   checkoutModal.classList.add("open");
 });
 
@@ -2077,6 +2124,35 @@ checkoutModal.addEventListener("click", event => {
     checkoutModal.classList.remove("open");
   }
 });
+
+// Apply promo code logic
+document.getElementById("applyPromoBtn").addEventListener("click", () => {
+  applyPromoCodeLogic();
+});
+
+function applyPromoCodeLogic() {
+  const codeInput = document.getElementById("promoCode").value.trim().toUpperCase();
+  const feedback = document.getElementById("promoFeedback");
+
+  if (codeInput === "DELULU10") {
+    appliedDiscountRate = 0.10;
+    appliedPromoCode = "DELULU10";
+    feedback.style.color = "#4caf50";
+    feedback.textContent = "Kodi DELULU10 u aplikua me sukses! Zbritje 10%.";
+    showToast("Kodi DELULU10 u aplikua me sukses (-10%)! ⚡");
+  } else if (codeInput === "") {
+    appliedDiscountRate = 0;
+    appliedPromoCode = "";
+    feedback.textContent = "";
+  } else {
+    appliedDiscountRate = 0;
+    appliedPromoCode = "";
+    feedback.style.color = "#ff2e63";
+    feedback.textContent = "Kodi i vendosur nuk është i vlefshëm.";
+  }
+
+  updateCheckoutSummary();
+}
 
 document.getElementById("checkoutForm").addEventListener("submit", event => {
   event.preventDefault();
@@ -2092,12 +2168,15 @@ document.getElementById("checkoutForm").addEventListener("submit", event => {
   const address = document.getElementById("customerAddress").value.trim();
   const notes = document.getElementById("customerNotes").value.trim();
 
-  const totalPrice = cart.reduce(
+  const subtotalPrice = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  
+  const discountAmount = appliedDiscountRate > 0 ? Math.round(subtotalPrice * appliedDiscountRate) : 0;
+  const finalPrice = subtotalPrice - discountAmount;
 
-  let message = "Përshëndetje Delulu Boutique! Dua të bëj këtë porosi:\n\n";
+  let message = "Përshëndetje Delulu Boutique! Dua të bëj këtë porosi (Black Friday ⚡):\n\n";
 
   message += "EMRI: " + name + "\n";
   message += "TELEFONI: " + phone + "\n";
@@ -2109,7 +2188,14 @@ document.getElementById("checkoutForm").addEventListener("submit", event => {
     message += `${index + 1}. ${item.name} | Masa ${item.size} | Sasia: ${item.quantity} | ${formatPrice(item.price * item.quantity)}\n`;
   });
 
-  message += "\nTOTALI I PRODUKTEVE: " + formatPrice(totalPrice) + "\n";
+  message += "\nNËNTOTALI: " + formatPrice(subtotalPrice) + "\n";
+
+  if (appliedDiscountRate > 0) {
+    message += `KODI I ULJES: ${appliedPromoCode} (-10%)\n`;
+    message += `ULJA SHTESË: -${formatPrice(discountAmount)}\n`;
+  }
+
+  message += "TOTALI PËRFUNDIMTAR: " + formatPrice(finalPrice) + "\n";
   message += "Transporti: Ju lutem konfirmoni koston e transportit.\n";
 
   if (notes) {
@@ -2118,7 +2204,7 @@ document.getElementById("checkoutForm").addEventListener("submit", event => {
 
   message += "\nFaleminderit!";
 
-  const whatsappNumber = "18194867799";
+  const whatsappNumber = "18194867873";
   const whatsappURL =
     "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
 
@@ -2160,17 +2246,28 @@ document.getElementById("wishlistForm").addEventListener("submit", event => {
     return;
   }
 
-  message.textContent =
-    "Faleminderit! U regjistruat me sukses ne Delulu Boutique 🎃.";
+  // Pre-fill promo code field in checkout modal
+  document.getElementById("promoCode").value = "DELULU10";
+  appliedDiscountRate = 0.10;
+  appliedPromoCode = "DELULU10";
+  document.getElementById("promoFeedback").style.color = "#4caf50";
+  document.getElementById("promoFeedback").textContent = "Kodi DELULU10 u aplikua me sukses! Zbritje 10%.";
+
+  message.innerHTML = `
+    Faleminderit! U regjistruat me sukses në Delulu Boutique ⚡.<br>
+    Kodi yt për 10% ulje është: <br>
+    <span class="promo-code-badge">DELULU10</span><br>
+    <small style="color:var(--text-muted); font-size:11px; display:inline-block; margin-top:6px;">Kodi është aplikuar automatikisht për porosinë tënde!</small>
+  `;
 
   emailInput.value = "";
+  showToast("U regjistruat! Kodi DELULU10 është gati për checkout ⚡");
 });
 
 document.getElementById("currentYear").textContent =
   new Date().getFullYear();
 
 // Init
-initHalloweenBats();
 renderProducts();
 updateCart();
 </script>
