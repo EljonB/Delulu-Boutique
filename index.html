@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Delulu Boutique | Black Friday Edition ⚡</title>
-<meta name="description" content="Zbulo koleksionin e veçantë të Black Friday me atletet dhe UGG më të kërkuara nga Delulu Boutique. Përdor kodin DELULU10 për 10% ulje shtesë.">
+<meta name="description" content="Zbulo koleksionin e veçantë të Black Friday me atletet dhe UGG më të kërkuara nga Delulu Boutique. Regjistrohu me email për të marrë 10% ulje shtesë.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1300,7 +1300,7 @@ footer {
 <body>
 
 <div class="announcement">
-  ⚡ BLACK FRIDAY SALE · DELULU BOUTIQUE · PËRDOR KODIN 'DELULU10' PËR 10% ULJE SHTESË ⚡
+  ⚡ BLACK FRIDAY SALE · DELULU BOUTIQUE · REGJISTRO EMAIL-IN PËR TË MARRË 10% ULJE SHTESË ⚡
 </div>
 
 <header>
@@ -1335,7 +1335,7 @@ footer {
 
       <p>
         Modele ekskluzive me çmimet më të ulëta të vitit. Zbulo koleksionin
-        tonë të atleteve dhe UGG dhe përfitoni 10% ulje shtesë.
+        tonë të atleteve dhe UGG dhe përfitoni 10% ulje shtesë pasi të regjistroheni me email.
       </p>
 
       <a href="#collection" class="button">ZBULO KOLEKSIONIN ↗</a>
@@ -1475,7 +1475,7 @@ footer {
 
         <p>
           Regjistro email-in tënd për të marrë kodin e uljes 10%
-          që mund ta përdorësh menjëherë gjatë Checkout-it!
+          që mund ta përdorësh gjatë Checkout-it!
         </p>
 
         <form class="wishlist-form" id="wishlistForm">
@@ -1518,8 +1518,8 @@ footer {
       <a href="https://www.instagram.com/delulu_boutique_al/" target="_blank" rel="noopener">
         Instagram
       </a>
-      <a href="https://wa.me/18194867873" target="_blank" rel="noopener">
-        WhatsApp: +1 (819) 486-7873
+      <a href="https://wa.me/18194867799" target="_blank" rel="noopener">
+        WhatsApp: +1 (819) 486-7799
       </a>
     </div>
   </div>
@@ -1586,7 +1586,7 @@ footer {
       <div class="form-group">
         <label for="promoCode">Kodi i Zbritjes (Opsionale)</label>
         <div style="display:flex; gap:8px;">
-          <input id="promoCode" type="text" placeholder="p.sh. DELULU10" style="text-transform:uppercase;">
+          <input id="promoCode" type="text" placeholder="Vendos kodin këtu" style="text-transform:uppercase;">
           <button type="button" class="button-light" id="applyPromoBtn" style="padding:0 16px; white-space:nowrap;">APLIKO</button>
         </div>
         <div id="promoFeedback" style="font-size:12px; margin-top:6px; font-weight:600;"></div>
@@ -1804,7 +1804,7 @@ let cart = [];
 let wishlist = [];
 
 // Promo code state
-let appliedDiscountRate = 0; // 0.10 when DELULU10 is applied
+let appliedDiscountRate = 0;
 let appliedPromoCode = "";
 
 const productGrid = document.getElementById("productGrid");
@@ -2138,8 +2138,8 @@ function applyPromoCodeLogic() {
     appliedDiscountRate = 0.10;
     appliedPromoCode = "DELULU10";
     feedback.style.color = "#4caf50";
-    feedback.textContent = "Kodi DELULU10 u aplikua me sukses! Zbritje 10%.";
-    showToast("Kodi DELULU10 u aplikua me sukses (-10%)! ⚡");
+    feedback.textContent = "Kodi u aplikua me sukses! Zbritje 10%.";
+    showToast("Kodi u aplikua me sukses (-10%)! ⚡");
   } else if (codeInput === "") {
     appliedDiscountRate = 0;
     appliedPromoCode = "";
@@ -2204,7 +2204,7 @@ document.getElementById("checkoutForm").addEventListener("submit", event => {
 
   message += "\nFaleminderit!";
 
-  const whatsappNumber = "18194867873";
+  const whatsappNumber = "18194867799";
   const whatsappURL =
     "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
 
@@ -2246,7 +2246,7 @@ document.getElementById("wishlistForm").addEventListener("submit", event => {
     return;
   }
 
-  // Pre-fill promo code field in checkout modal
+  // Pre-fill promo code field in checkout modal for registered users
   document.getElementById("promoCode").value = "DELULU10";
   appliedDiscountRate = 0.10;
   appliedPromoCode = "DELULU10";
@@ -2255,13 +2255,13 @@ document.getElementById("wishlistForm").addEventListener("submit", event => {
 
   message.innerHTML = `
     Faleminderit! U regjistruat me sukses në Delulu Boutique ⚡.<br>
-    Kodi yt për 10% ulje është: <br>
+    Kodi yt ekskluziv për 10% ulje është: <br>
     <span class="promo-code-badge">DELULU10</span><br>
     <small style="color:var(--text-muted); font-size:11px; display:inline-block; margin-top:6px;">Kodi është aplikuar automatikisht për porosinë tënde!</small>
   `;
 
   emailInput.value = "";
-  showToast("U regjistruat! Kodi DELULU10 është gati për checkout ⚡");
+  showToast("U regjistruat! Kodi u aplikua për checkout ⚡");
 });
 
 document.getElementById("currentYear").textContent =
